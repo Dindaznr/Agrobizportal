@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name', 60);
             $table->string('slug');
             $table->string('image', 100)->nullable();
-            $table->boolean('status')->default(1);
+            $table->boolean('active')->default(1);
         });
     }
 

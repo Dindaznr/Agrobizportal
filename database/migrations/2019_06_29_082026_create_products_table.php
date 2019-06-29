@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->string('image', 100)->nullable();
             $table->integer('price');
             $table->integer('stock')->default(1);
-            $table->boolean('status')->default(1);
+            $table->boolean('active')->default(1);
 
             $table->integer('rate_count')->default(0)->nullable();
             $table->integer('sale_counts')->default(0)->unsigned();

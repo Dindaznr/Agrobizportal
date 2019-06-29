@@ -22,7 +22,7 @@ class CreateSellersTable extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->text('image')->nullable();
-            $table->boolean('status')->default(1);
+            $table->boolean('active')->default(1);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

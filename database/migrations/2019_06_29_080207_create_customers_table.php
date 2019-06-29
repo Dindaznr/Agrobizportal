@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->enum('gender', ['wanita', 'pria'])->default('pria');
             $table->text('image')->nullable();
-            $table->boolean('status')->default(1);
+            $table->boolean('active')->default(1);
             $table->softDeletes();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
