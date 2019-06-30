@@ -3,8 +3,7 @@
 @section('content')
 @component('components.breadcumb',
     array(
-        'category' => $product->category,
-        'product' => $product
+        'category' => $category
     )
 
 )
@@ -12,9 +11,9 @@
 
 <div class="container">
     <div class="row">
+        
+        @component('components.sidebar') @endcomponent
 
-        @component('components.sidebar')@endcomponent
-    
         <div class="col">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4">

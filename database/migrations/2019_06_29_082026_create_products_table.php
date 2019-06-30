@@ -17,11 +17,11 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->integer('category_id')->unsigned();
-            $table->integer('created_by')->unsigned();
+            // $table->integer('category_id')->unsigned();
+            $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             
-            $table->string('name', 60);
+            $table->string('name');
             $table->string('slug');
             $table->string('description', 500);
             $table->string('image', 100)->nullable();
@@ -34,7 +34,7 @@ class CreateProductsTable extends Migration
 
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('categories');
+            // $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

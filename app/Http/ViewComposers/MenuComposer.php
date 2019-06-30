@@ -3,6 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
+use App\Model\Product;
 use App\Model\Category;
 
 class MenuComposer
@@ -15,6 +16,7 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        $view->with('categories', Category::select('name', 'slug')->get());
+        $view->with('product', Product::whereActive(true)->limit(1)->latest()->first());
+        $view->with('categories', Category::select('name', 'slug')->limit(5)->get());
     }
 }

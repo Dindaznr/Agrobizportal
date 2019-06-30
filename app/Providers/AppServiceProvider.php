@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         setLocale(LC_TIME, config('app.locale'));
 
-        view()->composer('home', MenuComposer::class);
+        view()->composer('components.sidebar', MenuComposer::class);
     }
 
     /**

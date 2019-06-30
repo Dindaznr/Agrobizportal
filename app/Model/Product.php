@@ -13,8 +13,18 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id', 'created_by', 'updated_by',
+        'created_by', 'updated_by',
         'name', 'slug', 'description', 'image', 'price', 'stock', 'active',
         'rate_count', 'sale_counts'
     ];
+
+    /**
+     * Many to Many relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
