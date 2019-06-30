@@ -13,6 +13,6 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'image', 'status'
+        'name', 'slug', 'image', 'active'
     ];
 }

@@ -21,12 +21,15 @@ class AuthController extends Controller
         if (isset($verifyUser) ){
             $user = $verifyUser->user;
             $status = "Email Anda berhasil diverifikasi. Anda sekarang dapat login.";
-            if (!$user->verified) {
+            if (!$user->email_verified_at) {
                 $verifyUser->user->email_verified_at = new \DateTime();
+                $verifyUser->user->customer->active = 1;
+                
+                $verifyUser->user->customer->save();
                 $verifyUser->user->save();
                 $status = "Email Anda sudah diverifikasi. Anda sudah dapat login.";
             }
-
+            
             $verifyUser->delete();
 
             // $this->guard()->login($user); // trigered auto login

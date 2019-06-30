@@ -96,7 +96,7 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'name' => $data['name'],
             'gender' => $data['gender'],
-            'status' => false
+            'active' => false
         ]);
 
         $verifyUser = VerifyUser::create([

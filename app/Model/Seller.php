@@ -13,6 +13,6 @@ class Seller extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'slug', 'description', 'image', 'status'
+        'user_id', 'name', 'slug', 'description', 'image', 'active'
     ];
 }
