@@ -10,6 +10,28 @@ use App\Http\Controllers\Controller;
 class ProductController extends Controller
 {
     /**
+     * Display the specified product by slug.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  string $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $slug)
+    {
+        $product = Product::with(
+            [
+                'categories' => function ($q) {
+                    $q->select('name', 'slug');
+                }
+            ]
+        )
+        ->whereSlug($slug)
+        ->firstOrFail();
+        
+        return view('product-detail', compact('product'));
+    }
+
+    /**
      * Display a listing of the product for the specified category.
      *
      * @param  \App\Models\Category  $category
@@ -23,9 +45,8 @@ class ProductController extends Controller
             ->whereHas('categories', function ($q) use ($category) {
                 $q->where('categories.slug', $category->slug);
             })->get();
-    
         $info = __('Posts for category: ') . '<strong>' . $category->title . '</strong>';
-        // dd($products);
+
         return view('product-category', compact('products', 'category', 'info'));
     }
 }

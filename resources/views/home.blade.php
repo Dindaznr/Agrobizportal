@@ -20,10 +20,10 @@
                                 <p class="card-text">{{ str_limit($product->description, 30) }}</p>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="btn btn-danger btn-block">Rp. {{ $product->price }}</p>
+                                        <p class="btn btn-danger btn-block">IDR {{ number_format($product->price) }}</p>
                                     </div>
                                     <div class="col">
-                                        <a href="#" class="btn btn-success btn-block">Tambah ke keranjang</a>
+                                        <a href="{{ url('add-to-cart/'. $product->id .'?quantity=1') }}" class="btn btn-success btn-block">Tambah ke keranjang</a>
                                     </div>
                                 </div>
                             </div>

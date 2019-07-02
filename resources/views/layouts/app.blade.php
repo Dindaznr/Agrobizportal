@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -61,8 +62,10 @@
                         </div>
                         <a class="btn btn-success btn-sm ml-3" href="{{ url('cart') }}">
                             <i class="fa fa-shopping-cart"></i> Cart
+                            @if(session('cart'))
+                            <span class="badge badge-light">{{ count(session('cart')) }}</span>
+                            @endif
                             @if(Auth::user())
-                            <span class="badge badge-light">3</span>
                             @endif
                         </a>
                     </form>
@@ -156,5 +159,6 @@
             </div>
         </footer>
     </div>
+@yield('js')
 </body>
 </html>

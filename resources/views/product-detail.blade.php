@@ -1,144 +1,76 @@
 @extends('layouts.app')
 
 @section('content')
+    
 @component('components.breadcumb',
     array(
-        'category' => $product->category,
+        'category' => $product->categories[0],
         'product' => $product
     )
 
 )
 @endcomponent
-
 <div class="container">
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="row">
+        <div class="col-12 col-md-6 col-lg-5 item-photo">
+            <img style="max-width:100%;" src="{{ asset('image/'. $product->image) }}" />
+        </div>
+        <div class="col-12 col-md-6" style="border:0px solid gray">
+            <!-- Datos del vendedor y titulo del producto -->
+            <h3>{{ $product->name }}</h3>    
+            <!-- <h5 style="color:#337ab7">vendido por <a href="#">Samsung</a> · <small style="color:#337ab7">(5054 ventas)</small></h5> -->
 
-        @component('components.sidebar')@endcomponent
-    
-        <div class="col">
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="btn btn-danger btn-block">99.00 $</p>
-                                </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="btn btn-danger btn-block">99.00 $</p>
-                                </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="btn btn-danger btn-block">99.00 $</p>
-                                </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="btn btn-danger btn-block">99.00 $</p>
-                                </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="btn btn-danger btn-block">99.00 $</p>
-                                </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
-                        <div class="card-body">
-                            <h4 class="card-title"><a href="product.html" title="View Product">Product title</a></h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="btn btn-danger btn-block">99.00 $</p>
-                                </div>
-                                <div class="col">
-                                    <a href="#" class="btn btn-success btn-block">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+            <!-- Precios -->
+            <h6 class="title-price"><small>Harga</small></h6>
+            <h3 style="margin-top:0px;">IDR {{ number_format($product->price) }}</h3>
+
+            <!-- Detalles especificos del producto -->
+            <!-- <div class="section">
+                <h6 class="title-attr" style="margin-top:15px;" ><small>COLOR</small></h6>                    
+                <div>
+                    <div class="attr" style="width:25px;background:#5a5a5a;"></div>
+                    <div class="attr" style="width:25px;background:white;"></div>
                 </div>
             </div>
-        </div>
+            <div class="section" style="padding-bottom:5px;">
+                <h6 class="title-attr"><small>TYPE</small></h6>                    
+                <div>
+                    <div class="attr2">16 GB</div>
+                    <div class="attr2">32 GB</div>
+                </div>
+            </div> -->
+            <form method="GET" action="{{ url('add-to-cart/'. $product->id) }}">
+                @csrf
+                <div class="section" style="padding-bottom:20px;">
+                    <h6 class="title-attr"><small> QUANTITY</small></h6>
+                    <input value="1" type="number" name="quantity" min="1"/>
+                </div>                
 
+                <!-- Botones de compra -->
+                <button type="submit" class="btn btn-success">
+                    Tambah ke keranjang
+                </button>
+            </form>                                 
+            <br>
+            <h6><a href="{{ url('/') }}"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span>Kembali belanja</a></h6>
+        </div>                              
+
+        <div class="col-12 col-md-12">
+            <ul class="menu-items">
+                <li class="active">Deskripsi</li>
+            </ul>
+            <div style="width:100%;border-top:1px solid silver">
+                <p style="padding:15px;">
+                    {{ $product->description }}
+                </p>
+            </div>
+        </div>		
     </div>
 </div>
 @endsection
+

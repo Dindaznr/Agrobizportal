@@ -22,12 +22,122 @@ class CartController extends Controller
     /**
      * Display a listing of the product has been adding.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function cart(Category $category)
+    public function cart(Request $request)
     {
         
         return view('cart');
+    }
+    
+    /**
+     * 
+     * @param  \Illuminate\Http\Request $request
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addToCart(Request $request, $id)
+    {
+        $product = Product::with(
+            [
+                'categories' => function ($q) {
+                    $q->select('name', 'slug');
+                }
+            ]
+        )
+        ->whereId($id)
+        ->firstOrFail();
+
+        if (is_null($product)) {
+            return redirect()->back()->with(['error' => 'Product tidak ada']);
+        }
+
+        $cart = session()->get('cart');
+
+        // if cart is empty then this the first product
+        if(!$cart) {
+ 
+            $cart = [
+                    $id => [
+                        "name" => $product->name,
+                        "slug" => $product->slug,
+                        "quantity" => $request->quantity,
+                        "price" => $product->price,
+                        "image" => $product->image
+                    ]
+            ];
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect('/cart')->with('status', 'Produk berhasil ditambahkan ke keranjang');
+        }
+
+        // if cart not empty then check if this product exist then increment quantity
+        if(isset($cart[$id])) {
+ 
+            $cart[$id]['quantity'] = $request->quantity;
+ 
+            session()->put('cart', $cart);
+ 
+            return redirect('/cart')->with('status', 'Produk berhasil ditambahkan ke keranjang');
+ 
+        }
+
+        // if item not exist in cart then add to cart with quantity = 1
+        $cart[$id] = [
+            "name" => $product->name,
+            "slug" => $product->slug,
+            "quantity" => $request->quantity,
+            "price" => $product->price,
+            "image" => $product->image
+        ];
+ 
+        session()->put('cart', $cart);
+
+        return redirect('/cart')->with('status', 'Produk berhasil ditambahkan ke keranjang');
+    }
+
+    /**
+     * 
+     * @param  \Illuminate\Http\Request $request
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        if($request->id and $request->quantity)
+        {
+            $cart = session()->get('cart');
+ 
+            $cart[$request->id]["quantity"] = $request->quantity;
+ 
+            session()->put('cart', $cart);
+ 
+            session()->flash('success', 'Cart updated successfully');
+        }
+    }
+    
+    /**
+     * 
+     * @param  \Illuminate\Http\Request $request
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function remove(Request $request)
+    {
+        if($request->id) {
+ 
+            $cart = session()->get('cart');
+ 
+            if(isset($cart[$request->id])) {
+ 
+                unset($cart[$request->id]);
+ 
+                session()->put('cart', $cart);
+            }
+ 
+            session()->flash('success', 'Product removed successfully');
+        }
     }
 }
