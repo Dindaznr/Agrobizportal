@@ -13,11 +13,11 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'name' => 'Jaket WP Pria Kantor New Tab Waterprof Aklirik/ Jaket Motor WP Kekinian / Harington',
-            'slug' => 'Jaket-WP-Pria-Kantor-New-Tab-Waterprof-Aklirik-Jaket-Motor-WP-Kekinian-Harington',
-            'description' => 'Jaket New Tab Pria Kantor Waterprof / Jaket Motor WP Kekinian',
-            'image' => 'product-sample/c9d6029e1f0edfb61fab93829fe1cc6d.png',
-            'price' => 91000,
+            'name' => 'Jagung Manis Kupas Organik Non Pestisida 1 Pack x 500 Gram',
+            'slug' => 'Jagung-Manis-Kupas-Organik-Non-Pestisida-1-Pack-x-500-Gram',
+            'description' => 'Jagung Manis Kupas Organik. Ditanam secara alami, tanpa menggunakan bahan kimia dan obat-obatan kimia.',
+            'image' => 'product-sample/jagung.png',
+            'price' => 17000,
             'stock' => 10,
             'active' => true,
             'rate_count' => 0,
@@ -30,11 +30,11 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'name' => 'Preloved Savanah Dress Ash SAGARA XS',
-            'slug' => 'Preloved-Savanah-Dress-Ash-SAGARA-XS',
-            'description' => 'Preloved Savanah Dress Ash SAGARA bahan Linen Lorita, LD 86, Panjang 140 bahan adem.',
-            'image' => 'product-sample/a51e8303be2783a44c6bbb990e33699e.png',
-            'price' => 280000,
+            'name' => 'Benih Padi Unggul M400',
+            'slug' => 'Benih-Padi-Unggul-M400',
+            'description' => 'Umur : 90 hari setelah tanam. Potensi hasil : 11 Ton / hektar. Rata-rata Hasil : 8,8 ton / hektar. Jumlah bulir : 280-400 bulir per malai. Rebah : tahan kerebahan. Ketahanan : Tahan wereng dan jamur.',
+            'image' => 'product-sample/padi.png',
+            'price' => 115000,
             'stock' => 10,
             'active' => true,
             'rate_count' => 0,
@@ -47,11 +47,11 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'name' => 'Ever E Isi 30 Softgels',
-            'slug' => 'Ever-E-Isi-30-Softgels',
-            'description' => 'Ever E adalah produk vitamin E 250 IU yg bermanfaat sebagai antioksidan yg mampu menangkal radikal bebas. Ever E menggunakan kapsul lunak Vegicaps yg terbuat dari rumput laut sehingga cocok digunakan oleh vegetarian.',
-            'image' => 'product-sample/b9d6bbb9148cd3c7d0402523136b741d.png',
-            'price' => 48500,
+            'name' => 'Pupuk kompos 15 kg',
+            'slug' => 'Pupuk-Kompos-15-kg',
+            'description' => 'Cocok untuk pupuk berbagai macam tanaman agar lebih subur.',
+            'image' => 'product-sample/pupuk.jpg',
+            'price' => 20000,
             'stock' => 10,
             'active' => true,
             'rate_count' => 0,
@@ -64,11 +64,11 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'name' => 'Peripera Peri Ink Velvet',
-            'slug' => 'Peripera-Peri-Ink-Velvet',
-            'description' => '[Peripera] Peri Ink Velvet',
-            'image' => 'product-sample/1a7889a87164b1b98eb38ead1789c823.png',
-            'price' => 63500,
+            'name' => 'Alat Semprot Hama 2 Liter Tasco Murah',
+            'slug' => 'Alat-Semprot-Hama-2-Liter-Tasco-Murah',
+            'description' => 'Merk : Tasco. Kapasitas Tanki : 2 Liter. Made In KOREA.',
+            'image' => 'product-sample/sprayhama.jpg',
+            'price' => 53000,
             'stock' => 10,
             'active' => true,
             'rate_count' => 0,
@@ -81,11 +81,11 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
-            'name' => 'Miyako - MCM 612 Magic Com 1.2L 3in1 350W',
-            'slug' => 'Miyako-MCM-612-Magic-Com-1.2L-3in1-350W',
-            'description' => 'Miyako Magic Com 1.2 Liter - MCM-612 memudahkan anda dalam membuat makanan bergizi dan lezat. Dapat digunakan sebagai pengukus, penanak, dan dapat menghangatkan kembali makanan yang mulai dingin.',
-            'image' => 'product-sample/2ce70379717e35517bcc9c666b452abd.png',
-            'price' => 248087,
+            'name' => 'Melia Propolis Original Mss Melia Sehat Sejahtera',
+            'slug' => 'Melia-Propolis-Original-Mss-Melia-Sehat-Sejahtera',
+            'description' => 'Kemasan Asli , 1 Box isi 7 Botol.',
+            'image' => 'product-sample/propolis.jpg',
+            'price' => 240000,
             'stock' => 10,
             'active' => true,
             'rate_count' => 0,

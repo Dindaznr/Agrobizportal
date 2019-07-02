@@ -13,48 +13,28 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => 'Pakaian Pria',
-                'slug' => 'pakaian-pria',
+                'name' => 'Alat Pertanian',
+                'slug' => 'alat-pertanian',
                 'active' => true,
             ],
             [
-                'name' => 'Pakaian Wanita',
-                'slug' => 'pakaian-wanita',
+                'name' => 'Hasil Pertanian',
+                'slug' => 'hasil-pertanian',
                 'active' => true,
             ],
             [
-                'name' => 'Kesehatan',
-                'slug' => 'kesehatan',
+                'name' => 'Bibit',
+                'slug' => 'bibit',
                 'active' => true,
             ],
             [
-                'name' => 'Kecantikan',
-                'slug' => 'kecantikan',
+                'name' => 'Herbal',
+                'slug' => 'herbal',
                 'active' => true,
             ],
             [
-                'name' => 'Elektronik',
-                'slug' => 'elektronik',
-                'active' => true,
-            ],
-            [
-                'name' => 'Smartphone',
-                'slug' => 'smartphone',
-                'active' => true,
-            ],
-            [
-                'name' => 'Komputer & Aksesoris',
-                'slug' => 'komputer-dan-aksesoris',
-                'active' => true,
-            ],
-            [
-                'name' => 'Kamera',
-                'slug' => 'kamera',
-                'active' => true,
-            ],
-            [
-                'name' => 'Otomotif',
-                'slug' => 'otomotif',
+                'name' => 'Kerajinan',
+                'slug' => 'kerajinan',
                 'active' => true,
             ],
         ]);
