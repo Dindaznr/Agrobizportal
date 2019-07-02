@@ -17,7 +17,7 @@
                         <h5 class="card-title">
                             {{ $user->customer->name }}
                             <p class="card-text font-weight-light">
-                                {{ $address->address_1 }},
+                                {{ $address->name }},
                                 {{ $address->district }}, {{ $address->city }}, {{ $address->province }}
                             </p>
                         </h5>

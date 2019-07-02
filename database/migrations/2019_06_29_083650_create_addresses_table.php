@@ -20,8 +20,7 @@ class CreateAddressesTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             
             $table->string('alias');
-            $table->string('address_1');
-            $table->string('address_2')->nullable();
+            $table->string('name');
             
             $table->string('city', 100);
             $table->string('province', 100);

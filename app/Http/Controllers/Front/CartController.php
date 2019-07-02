@@ -26,8 +26,7 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function cart(Request $request)
-    {
-        
+    {   
         return view('cart');
     }
     

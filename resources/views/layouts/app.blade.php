@@ -21,6 +21,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     @yield('css')
 </head>
@@ -37,29 +38,29 @@
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
                     <ul class="navbar-nav m-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Categories <span class="sr-only">(current)</span></a>
+                        <li class="nav-item {{ \Request::is('/') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ \Request::is('/') ? '#' : url('/') }}">
+                                Home <span class="sr-only">(current)</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Product</a>
+                        <li class="nav-item {{ \Request::is('category') ? 'active' : '' }}">
+                            <a class="nav-link" href="#">Category</a>
                         </li>
                         <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Cart</a>
+                            <a class="nav-link" href="#">Product</a>
                         </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
                     </ul>
 
-                    <form class="form-inline my-2 my-lg-0">
+                    <form class="form-inline my-2 my-lg-0" role="search" method="get" action="{{ route('product.search') }}">
                         <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                            <input type="search" name="search" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search..." autocomplete="off" required>
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-secondary btn-number">
+                                <button type="submit" class="btn btn-secondary btn-number">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
                         </div>
+                    </form>
                         <a class="btn btn-success btn-sm ml-3" href="{{ url('cart') }}">
                             <i class="fa fa-shopping-cart"></i> Cart
                             @if(Auth::user())
@@ -68,7 +69,6 @@
                                 @endif
                             @endif
                         </a>
-                    </form>
 
                      <!-- Right Side Of Navbar -->
                      <ul class="navbar-nav ml-auto">
@@ -88,7 +88,8 @@
                                     @endif
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('people.index') }}">Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

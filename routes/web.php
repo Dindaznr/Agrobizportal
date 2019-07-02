@@ -29,3 +29,15 @@ Route::get('/cart/checkout', 'Front\CartController@checkout')->name('checkout');
 Route::get('/add-to-cart/{id}', 'Front\CartController@addToCart');
 Route::patch('update-cart', 'Front\CartController@update');
 Route::delete('remove-from-cart', 'Front\CartController@remove');
+
+// People
+Route::prefix('people')->namespace('Front')->group(function () {
+    Route::name('people.index')->get('', 'ProfileController@index');
+    Route::name('people.order')->get('/order', 'ProfileController@order');
+});
+
+Route::prefix('admin')->namespace('Back')->group(function () {
+    Route::name('dashboard')->get('/', function() {
+        return view('admin.dashboard');
+    });
+});
