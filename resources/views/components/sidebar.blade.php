@@ -9,11 +9,23 @@
     </div>
     <div class="card bg-light mb-3">
         <div class="card-header bg-success text-white text-uppercase">Product Baru</div>
-        <div class="card-body">
-            <img class="img-fluid" src="{{ asset('image/'. $product->image) }}" />
-            <h5 class="card-title">{{ str_limit($product->name, 30) }}</h5>
-            <p class="card-text">{{ str_limit($product->description, 30) }}</p>
-            <p class="bloc_left_price">Rp. {{ $product->price }}</p>
+        
+        <div class="card">
+            <img class="card-img-top" src="{{ asset('image/'. $product->image) }}" height="200" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" style="font-weight: bold;"><a href="{{ url('product/'. $product->slug) }}" title="View Product">{{ str_limit($product->name, 20) }}</a></h5>
+                <p class="card-text">{{ str_limit($product->description, 55) }}</p>
+                <div class="row">
+                    <div class="col">
+                        <strong style="text-align: center;">
+                            <small>IDR</small> {{ number_format($product->price) }}
+                        </strong>
+                    </div>
+                    <div class="col">
+                        <a href="{{ url('add-to-cart/'. $product->id .'?quantity=1') }}" class="btn btn-success btn-block">Tambah ke keranjang</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

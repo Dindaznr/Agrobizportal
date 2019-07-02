@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="min-height: 500px; margin-top: 100px;">
         <div class="col-md-8">
                 @if (session('error'))
                     <div class="alert alert-danger">

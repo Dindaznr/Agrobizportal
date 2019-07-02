@@ -62,10 +62,10 @@
                         </div>
                         <a class="btn btn-success btn-sm ml-3" href="{{ url('cart') }}">
                             <i class="fa fa-shopping-cart"></i> Cart
-                            @if(session('cart'))
-                            <span class="badge badge-light">{{ count(session('cart')) }}</span>
-                            @endif
                             @if(Auth::user())
+                                @if(session('cart'))
+                                <span class="badge badge-light">{{ count(session('cart')) }}</span>
+                                @endif
                             @endif
                         </a>
                     </form>

@@ -26,7 +26,6 @@ class CreateAddressesTable extends Migration
             $table->string('city', 100);
             $table->string('province', 100);
             $table->string('district', 100);
-            $table->string('zipcode', 20);
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');

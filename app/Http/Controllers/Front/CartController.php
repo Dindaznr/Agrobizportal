@@ -16,7 +16,7 @@ class CartController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -29,6 +29,29 @@ class CartController extends Controller
     {
         
         return view('cart');
+    }
+    
+    /**
+     * Display a listing of the product has been adding.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function checkout(Request $request)
+    {
+        
+        $user = $request->user();
+        $address = $user->address;
+        if (count($address) === 0) {
+            return redirect('/profile/address')->with('status', 'Silahkan lengkapi data Alamat Anda');    
+        }
+
+        $carts = session()->get('cart');
+        if (is_null($carts)) {
+            return redirect()->route('home')->with('status', 'Silahkan lengkapi data Alamat Anda');    
+        }
+
+        return view('checkout', compact('user', 'address', 'carts'));
     }
     
     /**
@@ -64,7 +87,8 @@ class CartController extends Controller
                         "slug" => $product->slug,
                         "quantity" => $request->quantity,
                         "price" => $product->price,
-                        "image" => $product->image
+                        "total" => ($product->price * $request->quantity),
+                        "image" => $product->image,
                     ]
             ];
  
@@ -90,6 +114,7 @@ class CartController extends Controller
             "slug" => $product->slug,
             "quantity" => $request->quantity,
             "price" => $product->price,
+            "total" => ($product->price * $request->quantity),
             "image" => $product->image
         ];
  
@@ -111,6 +136,7 @@ class CartController extends Controller
             $cart = session()->get('cart');
  
             $cart[$request->id]["quantity"] = $request->quantity;
+            $cart[$request->id]["total"] = ($cart[$request->id]["price"] * $request->quantity);
  
             session()->put('cart', $cart);
  

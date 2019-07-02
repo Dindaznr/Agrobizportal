@@ -25,6 +25,7 @@ Route::prefix('product')->namespace('Front')->group(function () {
 Route::get('/category/{category}', 'Front\ProductController@category')->name('category');
 
 Route::get('/cart', 'Front\CartController@cart')->name('cart');
+Route::get('/cart/checkout', 'Front\CartController@checkout')->name('checkout');
 Route::get('/add-to-cart/{id}', 'Front\CartController@addToCart');
 Route::patch('update-cart', 'Front\CartController@update');
 Route::delete('remove-from-cart', 'Front\CartController@remove');
