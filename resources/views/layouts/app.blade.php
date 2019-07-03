@@ -119,7 +119,7 @@
                         <h5>Tentang</h5>
                         <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                         <p class="mb-0">
-                        Agrobizportal adalah website-platform pertama di Budi Luhur dan Sekitarnya yang menawarkan transaksi jual beli online yang menyenangkan, gratis, dan terpercaya via website.
+                        Agrobizportal adalah website-platform pertama di Budi Luhur dan Sekitarnya yang menawarkan transaksi jual beli online yang menyenangkan, dan terpercaya via website. Bergabunglah dengan jutaan pengguna lainnya dengan mulai mendaftarkan produk jualan dan berbelanja berbagai penawaran menarik kapan saja, di mana saja. Ayo gabung dalam komunitas Agrobizportal dan mulai belanja sekarang!
                         </p>
                     </div>
 
