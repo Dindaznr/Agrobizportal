@@ -18,7 +18,7 @@ class CreateSellersTable extends Migration
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();
-            $table->string('name', 100);
+            $table->string('name');
             $table->string('slug');
             $table->longText('description');
             $table->text('image')->nullable();

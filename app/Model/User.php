@@ -34,8 +34,22 @@ class User extends Authenticatable implements CanResetPasswordContract
         'password', 'remember_token',
     ];
 
+    /**
+     * One to One relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function customer(){
         return $this->hasOne(Customer::class, 'user_id');
+    }
+    
+    /**
+     * One to One relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function seller(){
+        return $this->hasOne(Seller::class, 'user_id');
     }
 
     public function verifyUser()

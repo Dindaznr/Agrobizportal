@@ -40,4 +40,10 @@ Route::prefix('admin')->namespace('Back')->group(function () {
     Route::name('dashboard')->get('/', function() {
         return view('admin.dashboard');
     });
+
+    // Route::name('products.index')->get('/products', 'ProductController@index');
+    // Route::name('products.create')->get('/products/create', 'ProductController@create');
+    Route::resource('orders', 'OrderController');
+    Route::resource('products', 'ProductController');
+    Route::resource('categories', 'CategoryController');
 });
