@@ -23,6 +23,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Transaksi Code</th>
                                         <th scope="col">Price</th>
+                                        <th scope="col">Procedur</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -41,8 +42,19 @@
                                                 return $item['price'];
                                             }, $order->orderItem->toArray())) ) }}</td>
                                             <td>
+                                                @if($order->payment === 'cod')
+                                                    Cash On Delivery
+                                                @else
+                                                    Bank Transfer
+                                                @endif
+                                            </td>
+                                            <td>
                                                 @if($order->status == 'open')
+                                                    @if($order->payment != 'cod')
                                                     Menunggu Pembayaran
+                                                    @else
+                                                    Menunggu Pengiriman
+                                                    @endif
                                                 @elseif($order->status == 'paid')
                                                     Pesanan Sedang Di Proses
                                                 @elseif($order->status == 'sent')
@@ -64,7 +76,9 @@
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDropOption">
                                                         @if($order->status == 'open')
-                                                        <a class="dropdown-item update-order-confirm" data-id="{{ $order->id }}" href="#">Konfirmasi Pembayaran</a>
+                                                            @if($order->payment != 'cod')
+                                                            <a class="dropdown-item update-order-confirm" data-id="{{ $order->id }}" href="#">Konfirmasi Pembayaran</a>
+                                                            @endif
                                                         <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">Batalkan</a>
                                                         @endif
                                                         @if($order->status == 'sent' OR $order->status == 'close')

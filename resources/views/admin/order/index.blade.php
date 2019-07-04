@@ -16,6 +16,7 @@
             <th scope="col">Customer Name</th>
             <th scope="col">Transaksi Code</th>
             <th scope="col">Price</th>
+            <th scope="col">Procedur</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
         </tr>
@@ -28,11 +29,22 @@
             <td>{{ $order->code }}</td>
             
             <td>Rp. {{ number_format( array_sum(array_map(function ($item) {
-                                                return $item['price'];
-                                            }, $order->orderItem->toArray())) ) }}</td>
+                return $item['price'];
+            }, $order->orderItem->toArray())) ) }}</td>
+            <td>
+                @if($order->payment === 'cod')
+                    Cash On Delivery
+                @else
+                    Bank Transfer
+                @endif
+            </td>
             <td>
                 @if($order->status == 'open')
+                    @if($order->payment != 'cod')
                     Menunggu Pembayaran Customer
+                    @else
+                    Customer Menunggu Pengiriman
+                    @endif
                 @elseif($order->status == 'paid')
                     Customer Sudah Melakukan Pembayaran
                 @elseif($order->status == 'sent')
@@ -55,14 +67,17 @@
                     <span data-feather="menu"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDropOption">
-                    @if($order->status == 'open')
-                    <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">Batalkan</a>
+                    @if($order->payment == 'cod')
+                    <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">Pengiriman Pesanan</a>
                     @endif
                     @if($order->status == 'paid')
                     <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">Pengiriman Pesanan</a>
                     @endif
                     @if($order->status == 'received')
                     <a class="dropdown-item update-order-close" data-id="{{ $order->id }}" href="#">Close Up Pesanan</a>
+                    @endif
+                    @if($order->status == 'open')
+                    <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">Batalkan</a>
                     @endif
                     <a class="dropdown-item "href="#"></a>
                 </div>
