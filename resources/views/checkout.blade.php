@@ -83,13 +83,22 @@
                             <p class="card-text">Total Harga ({{ count($carts) }} Jenis barang) - Rp {{ number_format($total) }}</p>
                             <hr>
                             <p class="card-text">Jenis Pembayaran</p>
-                            <select name="payment_type" class="form-control" required>
+                            <select name="payment_type" class="form-control payment-type" required>
                                 <option></option>
                                 <option value="cod">Cash on delivery</option>
                                 <option value="transfer">Bank Transfer</option>
                             </select>
+                            <p style="display: none;" id="norek">
+                                <br>
+                                Mandiri Virtual Account : 900-00-405 0845-0
+                            </p>
                             <input type="hidden" name="customer_id" value="{{ $user->customer->id }}">
                             <input type="hidden" name="address_id" value="{{ $address->id }}">
+                            @foreach($carts as $id => $details)
+                            <input type="hidden" name="product_ids[]" value="{{ $details['id'] }}">
+                            <input type="hidden" name="quantitys[]" value="{{ $details['quantity'] }}">
+                            <input type="hidden" name="prices[]" value="{{ $details['total'] }}">
+                            @endforeach
                             <!-- <input type="hidden" name="seller_id" value="seller->id"> -->
                         </div>
                         <div class="card-footer bg-transparent text-center">
@@ -102,4 +111,22 @@
         
     </div>
 </div>
+@endsection
+
+@section('js')
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $(".payment-type").on('change', function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+            if (ele.val() === 'transfer') {
+                $('#norek').show()
+            } else {
+                $('#norek').hide()
+            }
+        });
+    })
+
+</script>
 @endsection

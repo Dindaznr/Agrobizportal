@@ -25,6 +25,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $products = Product::whereActive(true)
+            ->where('stock', '>', 0)
             ->limit(6)
             ->get();
     

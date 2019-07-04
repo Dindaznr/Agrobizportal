@@ -13,8 +13,8 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'customer_id', 'address_id', 'seller_id',
-        'status', 'type', 'description', 'end_date'
+        'code', 'resi_number', 'customer_id', 'address_id', 'seller_id',
+        'status', 'type', 'payment', 'description', 'delivery_date', 'end_date'
     ];
 
     /**
@@ -25,5 +25,10 @@ class Order extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function orderItem()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

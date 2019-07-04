@@ -22,11 +22,15 @@ class CreateOrdersTable extends Migration
             $table->integer('address_id')->unsigned()->nullable();
             $table->integer('seller_id')->unsigned()->nullable();
             
+            $table->text('code');
+            $table->text('resi_number')->nullable();
             $table->enum('status', ['sent', 'cancelled', 'closed', 'open', 'paid', 'pending', 'received']);
             $table->enum('type', ['cart', 'wishlist', 'order', 'later']);
             $table->string('description', 150)->nullable();
+            $table->string('payment');
+            $table->dateTime('delivery_date')->nullable();
             $table->dateTime('end_date')->nullable(); //cancelled or paid
-            
+
             // $table->foreign('customer_id')->references('id')->on('users');
             // $table->foreign('address_id')->references('id')->on('addresses');
             // $table->foreign('seller_id')->references('id')->on('users');

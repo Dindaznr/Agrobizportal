@@ -19,10 +19,8 @@ class CreateOrderDetailsTable extends Migration
 
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
-            $table->double('price', 10, 2);
             $table->integer('quantity');
-            $table->string('payment');
-            $table->dateTime('delivery_date')->nullable();
+            $table->double('price', 10, 2);
             $table->boolean('status')->default(1);
             
             $table->foreign('product_id')->references('id')->on('products');

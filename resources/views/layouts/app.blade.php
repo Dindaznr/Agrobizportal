@@ -38,17 +38,29 @@
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
                     <ul class="navbar-nav m-auto">
-                        <li class="nav-item {{ \Request::is('/') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ \Request::is('/') ? '#' : url('/') }}">
+                        @request('/')
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">
                                 Home <span class="sr-only">(current)</span>
                             </a>
                         </li>
-                        <li class="nav-item {{ \Request::is('category') ? 'active' : '' }}">
-                            <a class="nav-link" href="#">Category</a>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">
+                                Home <span class="sr-only">(current)</span>
+                            </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Product</a>
-                        </li> -->
+                        @endrequest
+
+                        @request('people/order')
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Pesanan Saya</a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('people.order') }}">Pesanan Saya</a>
+                        </li>
+                        @endrequest
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0" role="search" method="get" action="{{ route('product.search') }}">

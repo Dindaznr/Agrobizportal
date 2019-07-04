@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use App\Notifications\SendVerificationEmail;
+use App\Notifications\SendOrderCreatedEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -78,14 +79,16 @@ class User extends Authenticatable implements CanResetPasswordContract
     {
         $this->notify(new SendVerificationEmail($user, $token));
     }
-
-    // /**
-    //  * One to Many relation
-    //  *
-    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    //  */
-	// public function address()
-	// {
-	// 	return $this->hasOne(Address::class);
-	// }
+    
+    
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function SendOrderCreatedEmail($user, $order)
+    {
+        $this->notify(new SendOrderCreatedEmail($user, $order));
+    }
 }
