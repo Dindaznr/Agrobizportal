@@ -159,7 +159,7 @@
                         <ul class="list-unstyled">
                             <li><i class="fa fa-home mr-2"></i> Agrobizportal</li>
                             <li><i class="fa fa-envelope mr-2"></i> support@agrobizportal.com</li>
-                            <li><i class="fa fa-phone mr-2"></i> + 021 123 456 789</li>
+                            <li><i class="fa fa-phone mr-2"></i> +62 858-1447-8853</li>
                         </ul>
                     </div>
                     <div class="col-12 copyright mt-3">
