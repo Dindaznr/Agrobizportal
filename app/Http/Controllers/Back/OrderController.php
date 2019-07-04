@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Model\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.order.index');
+        $orders = Order::all();
+        return view('admin.order.index', compact('orders'));
     }
 
     /**

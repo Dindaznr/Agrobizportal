@@ -34,9 +34,6 @@
                                 $total = 0;
                             ?>
                             <div class="card-body">
-                                <!-- <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
@@ -75,25 +72,31 @@
                 }
             ?>
             <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-header text-center">
-                        Ringkasan Belanja
+                <form action="{{ route('order.store') }}" method="POST">
+                    @csrf
+                    <div class="card">
+                        <div class="card-header text-center">
+                            Ringkasan Belanja
+                        </div>
+                        <div class="card-body">
+                            <hr>
+                            <p class="card-text">Total Harga ({{ count($carts) }} Jenis barang) - Rp {{ number_format($total) }}</p>
+                            <hr>
+                            <p class="card-text">Jenis Pembayaran</p>
+                            <select name="payment_type" class="form-control" required>
+                                <option></option>
+                                <option value="cod">Cash on delivery</option>
+                                <option value="transfer">Bank Transfer</option>
+                            </select>
+                            <input type="hidden" name="customer_id" value="{{ $user->customer->id }}">
+                            <input type="hidden" name="address_id" value="{{ $address->id }}">
+                            <!-- <input type="hidden" name="seller_id" value="seller->id"> -->
+                        </div>
+                        <div class="card-footer bg-transparent text-center">
+                            <button type="submit" class="btn btn-success font-weight-bold">Bayar Sekarang</button>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <hr>
-                        <p class="card-text">Total Harga ({{ count($carts) }} Jenis barang) - Rp {{ number_format($total) }}</p>
-                        <hr>
-                        <p class="card-text">Jenis Pembayaran</p>
-                        <select name="payment_type" class="form-control">
-                            <option></option>
-                            <option value="cod">Cash on delivery</option>
-                            <option value="transfer">Bank Transfer</option>
-                        </select>
-                    </div>
-                    <div class="card-footer bg-transparent text-center">
-                        <button type="button" class="btn btn-success font-weight-bold">Bayar Sekarang</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
         

@@ -25,10 +25,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
+        @foreach($categories as $no => $category)
+        <tr class="{{ $category->active ? '' : 'table-warning' }}">
+            <th scope="row">{{ $no += 1 }}</th>
+            <td>{{ $category->name }}</td>
+            <td>{{ $category->slug }}</td>
             <td>
                 <button
                     title="edit"
@@ -44,6 +45,7 @@
                 </button>
             </td>
         </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection

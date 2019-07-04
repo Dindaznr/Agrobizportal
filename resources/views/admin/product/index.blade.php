@@ -29,13 +29,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Image</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Rp. 1000</td>
-            <td>10</td>
+        @foreach($products as $no => $product)
+        <tr class="{{ $product->active ? '' : 'table-warning' }}">
+            <th scope="row">{{ $no += 1 }}</th>
+            <td>{{ $product->image }}</td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->slug }}</td>
+            <td>Rp. {{ number_format($product->price) }}</td>
+            <td>{{ $product->stock }}</td>
             <td>
                 <button
                     title="edit"
@@ -51,6 +52,7 @@
                 </button>
             </td>
         </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection

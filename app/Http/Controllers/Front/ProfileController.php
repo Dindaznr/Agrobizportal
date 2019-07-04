@@ -28,15 +28,4 @@ class ProfileController extends Controller
     {
         return view('profile');
     }
-    
-    /**
-     * Display customer order page.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function order(Request $request)
-    {
-        return view('order');
-    }
 }

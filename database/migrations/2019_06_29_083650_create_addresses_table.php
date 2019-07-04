@@ -17,7 +17,8 @@ class CreateAddressesTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->integer('user_id')->unsigned()->nullable();
+            // $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('customer_id')->unsigned()->nullable();
             
             $table->string('alias');
             $table->string('name');
@@ -27,7 +28,8 @@ class CreateAddressesTable extends Migration
             $table->string('district', 100);
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 

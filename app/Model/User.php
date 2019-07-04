@@ -79,13 +79,13 @@ class User extends Authenticatable implements CanResetPasswordContract
         $this->notify(new SendVerificationEmail($user, $token));
     }
 
-    /**
-     * One to Many relation
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-	public function address()
-	{
-		return $this->hasOne(Address::class);
-	}
+    // /**
+    //  * One to Many relation
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    //  */
+	// public function address()
+	// {
+	// 	return $this->hasOne(Address::class);
+	// }
 }

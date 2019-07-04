@@ -13,7 +13,8 @@ class AddressesUserTableSeeder extends Seeder
     {
         DB::table('addresses')->insert([
             [
-                'user_id' => 1,
+                // 'user_id' => 1,
+                'customer_id' => 1,
                 'alias' => 'Kantor',
                 'name' => 'Graha Chantia Jl. Bangka Raya RT.2/RW.7',
                 'city' => 'Kota Jakarta Selatan',

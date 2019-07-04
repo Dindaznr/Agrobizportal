@@ -16,8 +16,9 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
             $table->integer('address_id')->unsigned()->nullable();
             $table->integer('seller_id')->unsigned()->nullable();
             
@@ -26,9 +27,9 @@ class CreateOrdersTable extends Migration
             $table->string('description', 150)->nullable();
             $table->dateTime('end_date')->nullable(); //cancelled or paid
             
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('address_id')->references('id')->on('addresses');
-            $table->foreign('seller_id')->references('id')->on('users');
+            // $table->foreign('customer_id')->references('id')->on('users');
+            // $table->foreign('address_id')->references('id')->on('addresses');
+            // $table->foreign('seller_id')->references('id')->on('users');
         });
     }
 

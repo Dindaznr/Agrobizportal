@@ -79,19 +79,6 @@
                 @endrequest
               </li>
               <li class="nav-item">
-                @request('admin/products')
-                  <a class="nav-link active" href="#">
-                    <span data-feather="home"></span>
-                    Products <span class="sr-only">(current)</span>
-                  </a>
-                @else
-                  <a class="nav-link" href="{{ route('products.index') }}">
-                    <span data-feather="home"></span>
-                    Products <span class="sr-only">(current)</span>
-                  </a>
-                @endrequest
-              </li>
-              <li class="nav-item">
                 @request('admin/categories')
                   <a class="nav-link active" href="#">
                     <span data-feather="home"></span>
@@ -101,6 +88,19 @@
                   <a class="nav-link" href="{{ route('categories.index') }}">
                     <span data-feather="home"></span>
                     Categories <span class="sr-only">(current)</span>
+                  </a>
+                @endrequest
+              </li>
+              <li class="nav-item">
+                @request('admin/products')
+                  <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    Products <span class="sr-only">(current)</span>
+                  </a>
+                @else
+                  <a class="nav-link" href="{{ route('products.index') }}">
+                    <span data-feather="home"></span>
+                    Products <span class="sr-only">(current)</span>
                   </a>
                 @endrequest
               </li>

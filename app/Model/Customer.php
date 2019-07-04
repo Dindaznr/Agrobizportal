@@ -15,4 +15,24 @@ class Customer extends Model
     protected $fillable = [
         'user_id', 'name', 'gender', 'image', 'active'
     ];
+
+    /**
+     * One to Many relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+	public function address()
+	{
+		return $this->hasOne(Address::class);
+	}
+
+    /**
+     * One to Many relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+	public function orders()
+	{
+		return $this->hasMany(Order::class);
+	}
 }
