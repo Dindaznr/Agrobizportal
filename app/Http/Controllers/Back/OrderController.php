@@ -69,9 +69,16 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if($request->id)
+        {
+            $order = Order::find($request->id);
+            $order->status = $request->status;
+            $order->save();
+
+            return $order;
+        }
     }
 
     /**

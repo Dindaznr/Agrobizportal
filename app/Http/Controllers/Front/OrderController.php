@@ -54,7 +54,7 @@ class OrderController extends Controller
         
         $resi = null;
         if ($request->payment_type != 'cod') {
-            $resi = rand(1,100000) .''.mt_rand(1,100000);
+            $resi = rand(1,100000) .''.mt_rand(1,100000) .''.mt_rand(1,100000);
         }
         $order = Order::create([
             'code' => 'INV/'. Carbon::now()->format('Ymd') .'/XIX/II/'. mt_rand(1,100000),
@@ -100,12 +100,14 @@ class OrderController extends Controller
     {
         if($request->id)
         {
-            $order = Order::find($request->id)->first();
+            $order = Order::find($request->id);
             $order->status = $request->status;
             $order->save();
 
-            foreach($order->orderItem as $item) {
-                $this->updateStockProduct($item->product->id);
+            if ($request->status === 'received') {
+                foreach($order->orderItem as $item) {
+                    $this->updateStockProduct($item->product->id);
+                }
             }
 
             return $order;
@@ -114,7 +116,7 @@ class OrderController extends Controller
 
     private function updateStockProduct($id)
     {
-        $product = Product::find($id)->first();
+        $product = Product::find($id);
         $stok = ($product->stock - 1);
         
         $product->stock = $stok;

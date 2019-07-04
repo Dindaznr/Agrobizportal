@@ -14,18 +14,39 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Customer Name</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Quantity</th>
+            <th scope="col">Transaksi Code</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
+        @foreach($orders as $no => $order)
+        <tr class="{{ $order->status === 'cancelled' ? 'table-danger' : ''}}">
             <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>10</td>
+            <td>{{ $order->customer->name }}</td>
+            <td>{{ $order->code }}</td>
+            
+            <td>Rp. {{ number_format( array_sum(array_map(function ($item) {
+                                                return $item['price'];
+                                            }, $order->orderItem->toArray())) ) }}</td>
             <td>
+                @if($order->status == 'open')
+                    Menunggu Pembayaran Customer
+                @elseif($order->status == 'paid')
+                    Customer Sudah Melakukan Pembayaran
+                @elseif($order->status == 'sent')
+                    Pesanan Sedang Dalam Pengiriman
+                @elseif($order->status == 'received')
+                    Pesanan Sudah Sampai
+                @elseif($order->status == 'cancelled')
+                    Pesanan Di Batalkan
+                @elseif($order->status == 'close')
+                    Pesanan Selesai
+                @endif
+            </td>
+            <td>
+                @if($order->status !== 'received' AND $order->status !== 'cancelled')
                 <button
                     id="btnGroupDropOption"
                     type="button"
@@ -34,12 +55,87 @@
                     <span data-feather="menu"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDropOption">
-                    <a class="dropdown-item" href="#">Dropdown link</a>
-                    <a class="dropdown-item" href="#">Dropdown link</a>
+                    @if($order->status == 'open')
+                    <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">Batalkan</a>
+                    @endif
+                    @if($order->status == 'paid')
+                    <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">Pengiriman Pesanan</a>
+                    @endif
+                    @if($order->status == 'received')
+                    <a class="dropdown-item update-order-close" data-id="{{ $order->id }}" href="#">Close Up Pesanan</a>
+                    @endif
+                    <a class="dropdown-item "href="#"></a>
                 </div>
+                @else
+                    -
+                @endif
             </td>
         </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection
     
+@section('js')
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $(".update-order-sent").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+            console.log('udpate to sent')
+            $.ajax({
+                url: '{{ url('admin/orders/update') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.attr("data-id"),
+                    status: 'sent'
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        });
+        
+        $(".update-order-close").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+            console.log('udpate to sent')
+            $.ajax({
+                url: '{{ url('admin/orders/update') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.attr("data-id"),
+                    status: 'closed'
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        });
+
+        $(".update-order-cancel").click(function (e) {
+            e.preventDefault();
+
+            var ele = $(this);
+            console.log('udpate to cancelled')
+            $.ajax({
+                url: '{{ url('admin/orders/update') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.attr("data-id"),
+                    status: 'cancelled'
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        });
+    })
+
+</script>
+@endsection

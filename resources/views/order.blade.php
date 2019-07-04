@@ -30,16 +30,16 @@
                                 <tbody>
                                     @if(count($orders) > 0)
                                         @foreach($orders as $no => $order)
-                                        <tr>
+                                        <tr class="{{ $order->status === 'cancelled' ? 'table-warning' : ''}}">
                                             <th scope="row">{{ $no +=1 }}</th>
                                             <td>
                                                 <a data-toggle="collapse" href="#collapseOrder_{{$no}}" role="button" aria-expanded="false" aria-controls="collapseOrder_{{$no}}">
                                                     {{ $order->code }}
                                                 </a>
                                             </td>
-                                            <td>Rp. {{ array_sum(array_map(function ($item) {
+                                            <td>Rp. {{ number_format( array_sum(array_map(function ($item) {
                                                 return $item['price'];
-                                            }, $order->orderItem->toArray())) }}</td>
+                                            }, $order->orderItem->toArray())) ) }}</td>
                                             <td>
                                                 @if($order->status == 'open')
                                                     Menunggu Pembayaran
@@ -54,7 +54,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($order->status !== 'received')
+                                                @if($order->status !== 'received' AND $order->status !== 'cancelled')
                                                 <button
                                                     id="btnGroupDropOption"
                                                     type="button"
@@ -67,7 +67,10 @@
                                                         <a class="dropdown-item update-order-confirm" data-id="{{ $order->id }}" href="#">Konfirmasi Pembayaran</a>
                                                         <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">Batalkan</a>
                                                         @endif
+                                                        @if($order->status == 'sent' OR $order->status == 'close')
                                                         <a class="dropdown-item update-order-received" data-id="{{ $order->id }}" href="#">Barang Sudah Di Terima</a>
+                                                        @endif
+                                                        <a class="dropdown-item" href="#"></a>
                                                 </div>
                                                 @else
                                                     -
