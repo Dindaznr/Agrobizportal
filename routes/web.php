@@ -55,5 +55,6 @@ Route::prefix('admin')->namespace('Back')->group(function () {
         Route::patch('orders/update', 'OrderController@update');
         Route::resource('products', 'ProductController');
         Route::resource('categories', 'CategoryController');
+        Route::resource('customers', 'CustomerController');
     });
 });

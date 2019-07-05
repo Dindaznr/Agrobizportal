@@ -92,6 +92,10 @@
                                 <br>
                                 Mandiri Virtual Account : 900-00-405 0845-0
                             </p>
+                            <br>
+                            <p class="card-text">Deskripsi</p>
+                            <textarea name="description" class="form-control"></textarea>
+                            <small id="description" class="form-text text-muted">Opsional</small>
                             <input type="hidden" name="customer_id" value="{{ $user->customer->id }}">
                             <input type="hidden" name="address_id" value="{{ $address->id }}">
                             @foreach($carts as $id => $details)

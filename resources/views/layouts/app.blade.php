@@ -52,15 +52,20 @@
                         </li>
                         @endrequest
 
-                        @request('people/order')
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Pesanan Saya</a>
-                        </li>
-                        @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('people.order') }}">Pesanan Saya</a>
-                        </li>
-                        @endrequest
+                        @if(Auth::user())
+                            @customer
+                                @request('people/order')
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Pesanan Saya</a>
+                                </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('people.order') }}">Pesanan Saya</a>
+                                </li>
+                                @endrequest
+                            @endcustomer
+                        @endif
+
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0" role="search" method="get" action="{{ route('product.search') }}">
@@ -95,6 +100,10 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                @admin
+                                    {{ Auth::user()->email }} <span class="caret"></span>
+                                @endadmin
+                                
                                 @seller
                                     {{ Auth::user()->seller->name }} <span class="caret"></span>
                                 @endseller
@@ -105,12 +114,18 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    @customer
-                                    <a class="dropdown-item" href="{{ route('people.index') }}">Profile</a>
-                                    @endcustomer
+                                    @admin
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                                    @endadmin
+                                    
                                     @seller
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
                                     @endseller
+                                    
+                                    @customer
+                                    <a class="dropdown-item" href="{{ route('people.index') }}">Profile</a>
+                                    @endcustomer
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

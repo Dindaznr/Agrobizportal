@@ -25,6 +25,12 @@ class UsersTableSeeder extends Seeder
                 'email' => 'eka378putra@gmail.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => new \DateTime()
+            ],
+            [
+                'role' => 'admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('password'),
+                'email_verified_at' => new \DateTime()
             ]
         ]);
     }

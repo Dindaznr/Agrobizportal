@@ -53,21 +53,37 @@ class OrderController extends Controller
         }, $products, $request->prices);
         
         $resi = null;
+        $status = 'pending';
         if ($request->payment_type != 'cod') {
+            $status = 'open';
             $resi = rand(1,100000) .''.mt_rand(1,100000) .''.mt_rand(1,100000);
         }
+        
         $order = Order::create([
             'code' => 'INV/'. Carbon::now()->format('Ymd') .'/XIX/II/'. mt_rand(1,100000),
             'resi_number' => $resi,
             'customer_id' => $request->customer_id,
             'address_id' => $request->address_id,
             'seller_id' => $request->seller_id,
-            'status' => 'open',
+            'status' => $status,
             'type' => 'order',
+            'description' => $request->description ? $request->description : null,
             'payment' => $request->payment_type
         ]);
+        $sessionOrder = [
+            'id' => $order->id,
+            'status' => $order->status
+        ];
+        
+        // session()->put('session-order', $sessionOrder);
         
         foreach($products as $product) {
+
+            $dataProduct = Product::find($product['id']);
+            $dataProduct->stock = ($dataProduct->stock - $product['quantity']);
+            $dataProduct->sale_counts = $product['quantity'];
+            $dataProduct->save();
+
             OrderDetail::create([
                 'order_id' => $order->id,
                 'product_id' => $product['id'],
@@ -106,7 +122,7 @@ class OrderController extends Controller
 
             if ($request->status === 'received') {
                 foreach($order->orderItem as $item) {
-                    $this->updateStockProduct($item->product->id);
+                    // $this->updateStockProduct($item->product->id);
                 }
             }
 

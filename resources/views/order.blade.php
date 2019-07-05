@@ -52,21 +52,36 @@
                                                 @if($order->status == 'open')
                                                     @if($order->payment != 'cod')
                                                     Menunggu Pembayaran
+                                                    
                                                     @else
                                                     Menunggu Pengiriman
+                                                    
                                                     @endif
                                                 @elseif($order->status == 'paid')
-                                                    Pesanan Sedang Di Proses
+                                                    Menunggu Konfirmasi Pembayaran
+                                                
+                                                @elseif($order->status == 'paid_verified')
+                                                    Di Teruskan Ke Seller
+                                                
+                                                @elseif($order->status == 'pending')
+                                                    Sedang Di Proses Seller
+                                                
                                                 @elseif($order->status == 'sent')
-                                                    Pesanan Sedang Dalam Pengiriman
+                                                    Sedang Dalam Pengiriman
+                                                
                                                 @elseif($order->status == 'received')
-                                                    Pesanan Sudah Sampai
+                                                    Sampai Tujuan
+                                                
+                                                @elseif($order->status == 'closed')
+                                                    Selesai
+                                                
                                                 @elseif($order->status == 'cancelled')
-                                                    Pesanan Di Batalkan
+                                                    Di Batalkan
+                                                
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($order->status !== 'received' AND $order->status !== 'cancelled')
+                                                @if( $order->status === 'open' OR $order->status === 'sent')
                                                 <button
                                                     id="btnGroupDropOption"
                                                     type="button"
@@ -95,7 +110,21 @@
                                             <div class="collapse" id="collapseOrder_{{$no}}">
                                                 <div class="card card-body">
                                                     <p><strong><small>Invoice : {{ $order->code }}</small> </strong></p>
-                                                    <p><strong> No.Resi : {{ $order->resi_number }} </strong></p>
+                                                    <p><strong>
+                                                            <small>
+                                                            Metode Pembayaran :
+                                                            @if($order->payment == 'cod')
+                                                                Cash On Delivery
+                                                            @elseif($order->payment == 'transfer')
+                                                                Bank Transfer
+                                                            @endif
+                                                            </small>
+                                                        </strong>
+                                                    </p>
+                                                    <p><strong><small>Deskripsi : {{ $order->description }}</small> </strong></p>
+                                                    @if($order->payment != 'cod')
+                                                    <p><strong><small> No.Resi : {{ $order->resi_number }} </small></strong></p>
+                                                    @endif
                                                     @foreach($order->orderItem as $item)
                                                         <p> <img class="rounded" src="{{ asset('image/'. $item->product->image) }}" height="100"/></p>
                                                         <p><strong>Product :</strong> {{ $item->product->name }}</p>

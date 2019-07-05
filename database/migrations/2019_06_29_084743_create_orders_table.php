@@ -24,9 +24,9 @@ class CreateOrdersTable extends Migration
             
             $table->text('code');
             $table->text('resi_number')->nullable();
-            $table->enum('status', ['sent', 'cancelled', 'closed', 'open', 'paid', 'pending', 'received']);
+            $table->enum('status', ['open', 'paid', 'paid_verified', 'pending', 'sent', 'received', 'cancelled', 'closed']);
             $table->enum('type', ['cart', 'wishlist', 'order', 'later']);
-            $table->string('description', 150)->nullable();
+            $table->text('description')->nullable();
             $table->string('payment');
             $table->dateTime('delivery_date')->nullable();
             $table->dateTime('end_date')->nullable(); //cancelled or paid

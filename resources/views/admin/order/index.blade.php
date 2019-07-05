@@ -42,23 +42,36 @@
                 @if($order->status == 'open')
                     @if($order->payment != 'cod')
                     Menunggu Pembayaran Customer
+
                     @else
                     Customer Menunggu Pengiriman
+                    
                     @endif
                 @elseif($order->status == 'paid')
+                    Menunggu Konfirmasi Pembayaran
+
+                @elseif($order->status == 'paid_verified')
                     Customer Sudah Melakukan Pembayaran
+                
+                @elseif($order->status == 'pending')
+                    Memproses Pesanan
+
                 @elseif($order->status == 'sent')
-                    Pesanan Sedang Dalam Pengiriman
+                    Sedang Dikirim
+                
                 @elseif($order->status == 'received')
-                    Pesanan Sudah Sampai
+                    Sampai Tujuan
+
+                @elseif($order->status == 'closed')
+                    Selesai
+                
                 @elseif($order->status == 'cancelled')
-                    Pesanan Di Batalkan
-                @elseif($order->status == 'close')
-                    Pesanan Selesai
+                    Di Batalkan
+                
                 @endif
             </td>
             <td>
-                @if($order->status !== 'cancelled')
+                @if($order->status !== 'cancelled' AND $order->status !== 'closed' AND $order->status !== 'sent')
                 <button
                     id="btnGroupDropOption"
                     type="button"
@@ -67,17 +80,25 @@
                     <span data-feather="menu"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDropOption">
-                    @if($order->payment == 'cod' AND $order->status !== 'received')
-                    <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">Pengiriman Pesanan</a>
+                    @if($order->status == 'pending')
+                    <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">
+                        Pengiriman Pesanan
+                    </a>
                     @endif
                     @if($order->status == 'paid')
-                    <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">Pengiriman Pesanan</a>
+                    <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">
+                        Pengiriman Pesanan
+                    </a>
                     @endif
                     @if($order->status == 'received')
-                    <a class="dropdown-item update-order-close" data-id="{{ $order->id }}" href="#">Close Up Pesanan</a>
+                    <a class="dropdown-item update-order-close" data-id="{{ $order->id }}" href="#">
+                        Close Up Pesanan
+                    </a>
                     @endif
-                    @if($order->status == 'open')
-                    <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">Batalkan</a>
+                    @if($order->status == 'open' OR $order->status == 'pending')
+                    <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">
+                        Batalkan
+                    </a>
                     @endif
                     <a class="dropdown-item "href="#"></a>
                 </div>

@@ -34,16 +34,29 @@
 
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      @admin
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{ config('app.name', 'Laravel') }} | Administrator {{ Auth::user()->email }}</a>
+      @endadmin
+
       @seller
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{ config('app.name', 'Laravel') }} | {{ Auth::user()->seller->name }}</a>
       @endseller
+      
       @customer
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{ config('app.name', 'Laravel') }} | {{ Auth::user()->customer->name }}</a>
       @endcustomer
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <a class="nav-link" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+              {{ __('Logout') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+          </form>
         </li>
       </ul>
     </nav>
@@ -53,6 +66,7 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
+              @seller
               <li class="nav-item">
                 @request('admin')
                   <a class="nav-link active" href="#">
@@ -106,8 +120,23 @@
                   </a>
                 @endrequest
               </li>
+              @endseller
 
               @admin
+              <li class="nav-item">
+                @request('admin/orders')
+                  <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    Pembayaran <span class="sr-only">(current)</span>
+                  </a>
+                @else
+                  <a class="nav-link" href="{{ route('orders.index') }}">
+                    <span data-feather="home"></span>
+                    Pembayaran <span class="sr-only">(current)</span>
+                  </a>
+                @endrequest
+              </li>
+              
               <li class="nav-item">
                 @request('admin/customers')
                   <a class="nav-link active" href="#">
