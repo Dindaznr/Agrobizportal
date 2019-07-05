@@ -41,7 +41,7 @@ class CartController extends Controller
         
         $user = $request->user();
         $address = $user->customer->address;
-        if (count($address) === 0) {
+        if (!$address) {
             return redirect('/profile/address')->with('status', 'Silahkan lengkapi data Alamat Anda');    
         }
 

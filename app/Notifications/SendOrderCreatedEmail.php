@@ -56,12 +56,12 @@ class SendOrderCreatedEmail extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $status = 'Mohon segera selesaikan pembayaran Anda';
+        $status = 'Mohon segera selesaikan pembayaran Anda ke nomor rekening Mandiri virtual account Kami : 900-00-405 0845-0';
         if ($this->order->payment == 'cod') {
             $status = 'Silahkan lakukan pembayaran saat kurir Anda tiba';
         }
         return (new MailMessage)
-                ->line(__('Hallo User.'))
+                ->line(__('Hallo '. $user->customer->name))
                 ->line(__($status))
                 ->line(__('Checkout berhasil pada: '. Carbon::now()->format('d/m/Y H:i:s')))
                 ->action(__('Check status order Anda'), url('people/order'))

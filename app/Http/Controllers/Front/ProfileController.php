@@ -28,4 +28,26 @@ class ProfileController extends Controller
     {
         return view('profile');
     }
+    
+    /**
+     * Display a profile page.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function address(Request $request)
+    {
+        return view('address');
+    }
+    
+    /**
+     * Display a profile page.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function submitAddress(Request $request)
+    {
+        return view('address');
+    }
 }

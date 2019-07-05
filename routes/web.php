@@ -39,6 +39,8 @@ Route::namespace('Front')->group(function () {
         Route::prefix('people')->group(function () {
             Route::name('people.index')->get('', 'ProfileController@index');
             Route::name('people.order')->get('order', 'OrderController@index');
+            Route::get('address', 'ProfileController@address');
+            Route::post('address', 'ProfileController@submitAddress');
             Route::patch('order/update', 'OrderController@update');
         });
     });
