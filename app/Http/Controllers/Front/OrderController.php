@@ -81,7 +81,7 @@ class OrderController extends Controller
 
             $dataProduct = Product::find($product['id']);
             $dataProduct->stock = ($dataProduct->stock - $product['quantity']);
-            $dataProduct->sale_counts = $product['quantity'];
+            $dataProduct->sale_counts = ($dataProduct->sale_counts + $product['quantity']);
             $dataProduct->save();
 
             OrderDetail::create([

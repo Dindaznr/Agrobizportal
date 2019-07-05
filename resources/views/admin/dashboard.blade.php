@@ -36,7 +36,7 @@
                     <td>{{ $product['name'] }}</td>
                     <td>{{ $product['sale_counts'] ? $product['sale_counts'] : 0 }}</td>
                     <td>{{ number_format($product['price'] * $product['sale_counts']) }}</td>
-                    <td>{{ $product->whereHas('itemOrder')->count() }}</td>
+                    <td>{{ $product->whereHas('orderItem')->count() }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -54,7 +54,7 @@
                     <th>Product</th>
                     <th>Total Penjualan (Unit)</th>
                     <th>Total Penjualan (Rupiah)</th>
-                    <!-- <th>Transaksi</th> -->
+                    <th>Transaksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@
                     <td>{{ $product['name'] }}</td>
                     <td>{{ $product['sale_counts'] }}</td>
                     <td>{{ number_format($product['price'] * $product['sale_counts']) }}</td>
-                    <!-- <td>{{-- $product->itemOrder->first()['id'] --}}</td> -->
+                    <td>{{ count($product->orderItem) }}</td>
                 </tr>
                 @endforeach
             </tbody>

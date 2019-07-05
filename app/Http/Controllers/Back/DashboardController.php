@@ -20,15 +20,14 @@ class DashboardController extends Controller
     {
         $categories = Category::all();
         $orders = Order::where('status', 'closed')->get();
-        $products = Product::all();
-        foreach ($products as $key => $product) {
-            foreach($product->itemOrder as $item) {
-                $item->order($item->order_id)->get();
+        $products = Product::with([
+            'orderItem' => function ($query) {
+                $query->whereHas('order', function ($q) {
+                    $q->whereStatus('closed');
+                });
             }
-            // return $query->whereHas('status', function ($q) use ($name) {
-            //         $q->where('name', $name);
-            // });
-        }
+        ])->get();
+        
         // if (count($orders)) {
         //     foreach($orders as $order){
         //         $products = $order->orderItem->map(function($item) use ($order) {
@@ -43,6 +42,16 @@ class DashboardController extends Controller
         // } else {
         //     $products = [];
         // }
+
+        // $products = $products->map(function ($product){
+        //     $product->orderItem->map(function($item) {
+        //         if (isset($item->order)) {
+        //             $item->transact
+        //         }
+        //     });
+        // });
+
+        // dd($products);
         
         return view('admin.dashboard', compact('products'));
     }

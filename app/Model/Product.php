@@ -33,7 +33,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-	public function itemOrder()
+	public function orderItem()
 	{
 		return $this->hasMany(OrderDetail::class);
 	}
