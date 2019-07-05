@@ -61,7 +61,7 @@ class SendOrderCreatedEmail extends Notification implements ShouldQueue
             $status = 'Silahkan lakukan pembayaran saat kurir Anda tiba';
         }
         return (new MailMessage)
-                ->line(__('Hallo '. $user->customer->name))
+                ->line(__('Hallo '. $this->user->customer->name))
                 ->line(__($status))
                 ->line(__('Checkout berhasil pada: '. Carbon::now()->format('d/m/Y H:i:s')))
                 ->action(__('Check status order Anda'), url('people/order'))

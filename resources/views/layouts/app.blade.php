@@ -95,13 +95,22 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    @if (Auth::user()->role == 'customer')
-                                        {{ Auth::user()->customer->name }} <span class="caret"></span>
-                                    @endif
+                                @seller
+                                    {{ Auth::user()->seller->name }} <span class="caret"></span>
+                                @endseller
+
+                                @customer
+                                    {{ Auth::user()->customer->name }} <span class="caret"></span>
+                                @endcustomer
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    @customer
                                     <a class="dropdown-item" href="{{ route('people.index') }}">Profile</a>
+                                    @endcustomer
+                                    @seller
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
+                                    @endseller
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -49,9 +49,7 @@ Route::namespace('Front')->group(function () {
 
 Route::prefix('admin')->namespace('Back')->group(function () {
     Route::middleware('auth')->group(function () {
-        Route::name('dashboard')->get('/', function() {
-            return view('admin.dashboard');
-        });
+        Route::name('dashboard')->get('/', 'DashboardController@index');
     
         Route::resource('orders', 'OrderController');
         Route::patch('orders/update', 'OrderController@update');

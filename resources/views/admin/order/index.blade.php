@@ -58,7 +58,7 @@
                 @endif
             </td>
             <td>
-                @if($order->status !== 'received' AND $order->status !== 'cancelled')
+                @if($order->status !== 'cancelled')
                 <button
                     id="btnGroupDropOption"
                     type="button"
@@ -67,7 +67,7 @@
                     <span data-feather="menu"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDropOption">
-                    @if($order->payment == 'cod')
+                    @if($order->payment == 'cod' AND $order->status !== 'received')
                     <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">Pengiriman Pesanan</a>
                     @endif
                     @if($order->status == 'paid')

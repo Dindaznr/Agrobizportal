@@ -32,7 +32,7 @@
         @foreach($products as $no => $product)
         <tr class="{{ $product->active ? '' : 'table-warning' }}">
             <th scope="row">{{ $no += 1 }}</th>
-            <td>{{ $product->image }}</td>
+            <td><img src="{{ asset('image/'. $product->image) }}" height="100"/></td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->slug }}</td>
             <td>Rp. {{ number_format($product->price) }}</td>

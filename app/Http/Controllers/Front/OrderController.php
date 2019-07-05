@@ -118,8 +118,10 @@ class OrderController extends Controller
     {
         $product = Product::find($id);
         $stok = ($product->stock - 1);
+        $sale_counts = ($product->sale_counts + 1);
         
         $product->stock = $stok;
+        $product->sale_counts = $sale_counts;
         $product->save();
 
         return $product;

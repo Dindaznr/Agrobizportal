@@ -14,8 +14,9 @@ class SellersTableSeeder extends Seeder
         DB::table('sellers')->insert([
             [
                 'user_id' => 2,
-                'name' => 'Eka Putra',
-                'gender' => 'pria',
+                'name' => 'Toko Pertanian Nasional',
+                'slug' => 'toko-pertanian-nasional',
+                'description' => '',
                 'image' => null,
                 'active' => true
             ]
