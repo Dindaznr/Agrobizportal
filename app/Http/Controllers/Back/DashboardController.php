@@ -20,19 +20,22 @@ class DashboardController extends Controller
         $categories = Category::all();
         $orders = Order::where('status', 'closed')->get();
         $products = null;
-        foreach($orders as $order){
-            $products = $order->orderItem->map(function($item) use ($order) {
-                return [
-                    'name' => $item->product->name,
-                    'sale_counts' => $item->sale_counts,
-                    'sale_counts_price' => ($item->sale_counts * $item->price),
-                    'transaction' => count($order->orderItem)
-                ];
-            });
+        
+        if (count($orders)) {
+            foreach($orders as $order){
+                $products = $order->orderItem->map(function($item) use ($order) {
+                    return [
+                        'name' => $item->product->name,
+                        'sale_counts' => $item->sale_counts,
+                        'sale_counts_price' => ($item->sale_counts * $item->price),
+                        'transaction' => count($order->orderItem)
+                    ];
+                });
+            }
+        } else {
+            $products = [];
         }
-
-        // dd($products);
-
+        
         return view('admin.dashboard', compact('products'));
     }
 }
