@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Order</h1>
+    <h1 class="h2">Order Payment</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary">Export</button>
@@ -48,10 +48,10 @@
                     
                     @endif
                 @elseif($order->status == 'paid')
-                    Menunggu Konfirmasi Pembayaran
+                    Menunggu verifikasi Pembayaran
 
                 @elseif($order->status == 'paid_verified')
-                    Customer Sudah Melakukan Pembayaran
+                    Pembayaran Sudah Di Verifikasi
                 
                 @elseif($order->status == 'pending')
                     Memproses Pesanan
@@ -71,7 +71,7 @@
                 @endif
             </td>
             <td>
-                @if($order->status !== 'cancelled' AND $order->status !== 'closed' AND $order->status !== 'sent' AND $order->status !== 'paid')
+                @if($order->status !== 'cancelled' AND $order->status !== 'closed' AND $order->status !== 'sent' AND $order->status !== 'paid_verified')
                 <button
                     id="btnGroupDropOption"
                     type="button"
@@ -80,22 +80,12 @@
                     <span data-feather="menu"></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDropOption">
-                    @if($order->status == 'paid_verified')
-                    <a class="dropdown-item update-order-pending" data-id="{{ $order->id }}" href="#">
-                        Proses Pesanan Sekarang
+                    @if($order->status == 'paid')
+                    <a class="dropdown-item update-order-verifikasi" data-id="{{ $order->id }}" href="#">
+                        Verifikasi Pembayaran
                     </a>
                     @endif
-                    @if($order->status == 'pending')
-                    <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">
-                        Pengiriman Pesanan
-                    </a>
-                    @endif
-                    @if($order->status == 'received')
-                    <a class="dropdown-item update-order-close" data-id="{{ $order->id }}" href="#">
-                        Close Up Pesanan
-                    </a>
-                    @endif
-                    @if($order->status == 'open' OR $order->status == 'pending')
+                    @if($order->status == 'open')
                     <a class="dropdown-item update-order-cancel" data-id="{{ $order->id }}" href="#">
                         Batalkan
                     </a>
@@ -115,7 +105,7 @@
 @section('js')
 <script type="text/javascript">
     $( document ).ready(function() {
-        $(".update-order-pending").click(function (e) {
+        $(".update-order-verifikasi").click(function (e) {
             e.preventDefault();
 
             var ele = $(this);
@@ -126,26 +116,7 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                     id: ele.attr("data-id"),
-                    status: 'pending'
-                },
-                success: function (response) {
-                    window.location.reload();
-                }
-            });
-        });
-        
-        $(".update-order-sent").click(function (e) {
-            e.preventDefault();
-
-            var ele = $(this);
-            console.log('udpate to sent')
-            $.ajax({
-                url: '{{ url('admin/orders/update') }}',
-                method: "patch",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id: ele.attr("data-id"),
-                    status: 'sent'
+                    status: 'paid_verified'
                 },
                 success: function (response) {
                     window.location.reload();

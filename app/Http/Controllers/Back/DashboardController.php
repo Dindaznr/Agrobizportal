@@ -28,31 +28,6 @@ class DashboardController extends Controller
             }
         ])->get();
         
-        // if (count($orders)) {
-        //     foreach($orders as $order){
-        //         $products = $order->orderItem->map(function($item) use ($order) {
-        //             return [
-        //                 'name' => $item->product->name,
-        //                 'sale_counts' => $item->product->sale_counts,
-        //                 'sale_counts_price' => ($item->product->sale_counts * $item->product->price),
-        //                 'transaction' => 1
-        //             ];
-        //         });
-        //     }
-        // } else {
-        //     $products = [];
-        // }
-
-        // $products = $products->map(function ($product){
-        //     $product->orderItem->map(function($item) {
-        //         if (isset($item->order)) {
-        //             $item->transact
-        //         }
-        //     });
-        // });
-
-        // dd($products);
-        
         return view('admin.dashboard', compact('products'));
     }
 }

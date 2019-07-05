@@ -36,7 +36,7 @@
                     <td>{{ $product['name'] }}</td>
                     <td>{{ $product['sale_counts'] ? $product['sale_counts'] : 0 }}</td>
                     <td>{{ number_format($product['price'] * $product['sale_counts']) }}</td>
-                    <td>{{ $product->whereHas('orderItem')->count() }}</td>
+                    <td>{{ count($product->orderItem) }}</td>
                 </tr>
                 @endforeach
             </tbody>

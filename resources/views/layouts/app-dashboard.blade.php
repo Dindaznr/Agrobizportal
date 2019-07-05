@@ -35,7 +35,7 @@
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       @admin
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{ config('app.name', 'Laravel') }} | Administrator {{ Auth::user()->email }}</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Administrator {{ Auth::user()->email }}</a>
       @endadmin
 
       @seller
@@ -124,13 +124,27 @@
 
               @admin
               <li class="nav-item">
-                @request('admin/orders')
+                @request('admin')
+                  <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                @else
+                  <a class="nav-link" href="{{ route('dashboard') }}">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                @endrequest
+              </li>
+              
+              <li class="nav-item">
+                @request('admin/orders/payment')
                   <a class="nav-link active" href="#">
                     <span data-feather="home"></span>
                     Pembayaran <span class="sr-only">(current)</span>
                   </a>
                 @else
-                  <a class="nav-link" href="{{ route('orders.index') }}">
+                  <a class="nav-link" href="{{ route('orders.payment') }}">
                     <span data-feather="home"></span>
                     Pembayaran <span class="sr-only">(current)</span>
                   </a>
@@ -160,12 +174,22 @@
               </a>
             </h6>
             <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Laporan Penjualan
-                </a>
-              </li>
+              @seller
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Laporan Penjualan
+                  </a>
+                </li>
+              @endseller
+              @admin
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="file-text"></span>
+                    Laporan
+                  </a>
+                </li>
+              @endadmin
             </ul>
           </div>
         </nav>

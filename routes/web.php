@@ -53,6 +53,7 @@ Route::prefix('admin')->namespace('Back')->group(function () {
     
         Route::resource('orders', 'OrderController');
         Route::patch('orders/update', 'OrderController@update');
+        Route::get('payment', 'OrderController@payment')->name('orders.payment');
         Route::resource('products', 'ProductController');
         Route::resource('categories', 'CategoryController');
         Route::resource('customers', 'CustomerController');

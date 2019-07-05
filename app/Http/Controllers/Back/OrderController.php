@@ -18,6 +18,17 @@ class OrderController extends Controller
         $orders = Order::all();
         return view('admin.order.index', compact('orders'));
     }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function payment(Request $request)
+    {
+        $orders = Order::all();
+        return view('admin.order.payment', compact('orders'));
+    }
 
     /**
      * Show the form for creating a new resource.
