@@ -49,8 +49,9 @@ class ProductController extends Controller
         $image = $this->uploadImage($request->file('featured_image'));
         $request['image'] = $image;
         $request['user_id'] = $user->id;
-        
-        Product::create($request->all());
+        $product = Product::create($request->all());
+
+        $product->categories()->sync([$request->category]);
         return redirect()->back()->with(['info' => 'Data produk berhasil di tambahkan']);
     }
 
