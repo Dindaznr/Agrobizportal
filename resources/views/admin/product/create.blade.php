@@ -10,7 +10,12 @@
         </div>
     </div>
 </div>
-<form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
+@if (session('info'))
+    <div class="alert alert-success">
+        {{ session('info') }}
+    </div>
+@endif
+<form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data" autocomplete="off">
 @csrf
     <div class="form-row">
         <div class="form-group col-md-3">
@@ -20,7 +25,7 @@
         </div>
         <div class="form-group col-md-3">
             <label for="slug">Slug</label>
-            <input type="text" name="slug" class="form-control" id="slug" placeholder="Product slug">
+            <input type="text" name="slug" class="form-control" id="slug" placeholder="Product-slug">
         </div>
     </div>
     <div class="form-row">
@@ -61,7 +66,9 @@
             <label for="category">Category</label>
             <select name="category" class="custom-control custom-select" id="category">
                 <option selected>-</option>
-                <option value="1">One</option>
+                @foreach($categories as $id => $category)   
+                <option value="{{ $id }}">{{ $category }}</option>
+                @endforeach
             </select>
         </div>
     </div>

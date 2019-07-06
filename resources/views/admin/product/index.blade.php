@@ -40,13 +40,13 @@
             <td>
                 <button
                     title="edit"
-                    onclick="window.location.href = '{{ route('categories.create') }}';"
+                    onclick="window.location.href = '{{ route('products.create') }}';"
                     class="btn btn-sm btn-outline-secondary">
                     <span data-feather="edit-3"></span>
                 </button>
                 <button
                     title="hapus"
-                    onclick="window.location.href = '{{ route('categories.create') }}';"
+                    onclick="window.location.href = '{{ route('products.create') }}';"
                     class="btn btn-sm btn-outline-secondary">
                     <span data-feather="trash-2"></span>
                 </button>

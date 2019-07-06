@@ -37,7 +37,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->back()->with(['info' => 'Data kategori berhasil di tambahkan']);
     }
 
     /**

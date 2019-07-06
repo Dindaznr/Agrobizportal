@@ -10,7 +10,12 @@
         </div>
     </div>
 </div>
-<form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
+@if (session('info'))
+    <div class="alert alert-success">
+        {{ session('info') }}
+    </div>
+@endif
+<form method="post" action="{{ route('categories.store') }}">
 @csrf
     <div class="form-row">
         <div class="form-group col-md-3">
