@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Model\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return view('admin.customer.index', compact('customers'));
     }
 
     /**

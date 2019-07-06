@@ -121,25 +121,12 @@ class OrderController extends Controller
             $order->save();
 
             if ($request->status === 'received') {
-                foreach($order->orderItem as $item) {
-                    // $this->updateStockProduct($item->product->id);
+                foreach ($order->orderItem as $item) {
+                    // $item->product->owner->email // email nya user -> seller
                 }
             }
 
             return $order;
         }
-    }
-
-    private function updateStockProduct($id)
-    {
-        $product = Product::find($id);
-        $stok = ($product->stock - 1);
-        $sale_counts = ($product->sale_counts + 1);
-        
-        $product->stock = $stok;
-        $product->sale_counts = $sale_counts;
-        $product->save();
-
-        return $product;
     }
 }

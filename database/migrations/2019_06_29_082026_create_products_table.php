@@ -17,8 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->integer('created_by')->unsigned()->nullable();
-            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned();
             
             $table->string('name');
             $table->string('slug');
@@ -31,8 +30,7 @@ class CreateProductsTable extends Migration
             $table->integer('rate_count')->default(0)->nullable();
             $table->integer('sale_counts')->default(0)->unsigned();
 
-            $table->foreign('created_by')->references('id')->on('users');
-            $table->foreign('updated_by')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

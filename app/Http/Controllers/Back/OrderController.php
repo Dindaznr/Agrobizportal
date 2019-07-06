@@ -89,10 +89,15 @@ class OrderController extends Controller
             $order->status = $request->status;
             $order->save();
 
-            if ($request->status === 'paid_verified')
-            {
-                $customer = Customer::find($order->customer_id);
-                $customer->user->PaidVerifiedEmail($customer->user, $order);
+            $customer = Customer::find($order->customer_id);
+            if ($customer) {
+                if ($request->status === 'paid_verified') {
+                    $customer->user->paidVerifiedEmail($customer->user, $order);
+                }
+                
+                if ($request->status === 'sent') {
+                    $customer->user->productHasBeenDeliveryEmail($customer->user, $order);
+                }
             }
 
             return $order;

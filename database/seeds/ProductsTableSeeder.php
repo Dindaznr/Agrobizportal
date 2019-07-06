@@ -13,6 +13,7 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         Product::create([
+            'user_id' => 2,
             'name' => 'Jagung Manis Kupas Organik Non Pestisida 1 Pack x 500 Gram',
             'slug' => 'Jagung-Manis-Kupas-Organik-Non-Pestisida-1-Pack-x-500-Gram',
             'description' => 'Jagung Manis Kupas Organik. Ditanam secara alami, tanpa menggunakan bahan kimia dan obat-obatan kimia.',
@@ -30,6 +31,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
+            'user_id' => 2,
             'name' => 'Benih Padi Unggul M400',
             'slug' => 'Benih-Padi-Unggul-M400',
             'description' => 'Umur : 90 hari setelah tanam. Potensi hasil : 11 Ton / hektar. Rata-rata Hasil : 8,8 ton / hektar. Jumlah bulir : 280-400 bulir per malai. Rebah : tahan kerebahan. Ketahanan : Tahan wereng dan jamur.',
@@ -47,6 +49,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
+            'user_id' => 2,
             'name' => 'Pupuk kompos 15 kg',
             'slug' => 'Pupuk-Kompos-15-kg',
             'description' => 'Cocok untuk pupuk berbagai macam tanaman agar lebih subur.',
@@ -64,6 +67,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
+            'user_id' => 2,
             'name' => 'Alat Semprot Hama 2 Liter Tasco Murah',
             'slug' => 'Alat-Semprot-Hama-2-Liter-Tasco-Murah',
             'description' => 'Merk : Tasco. Kapasitas Tanki : 2 Liter. Made In KOREA.',
@@ -81,6 +85,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         
         Product::create([
+            'user_id' => 2,
             'name' => 'Melia Propolis Original Mss Melia Sehat Sejahtera',
             'slug' => 'Melia-Propolis-Original-Mss-Melia-Sehat-Sejahtera',
             'description' => 'Kemasan Asli , 1 Box isi 7 Botol.',

@@ -7,6 +7,7 @@ use App\Model\Product;
 use App\Model\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -18,7 +19,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::all();
+        $user = Auth::user();
+        $products = Product::where('user_id', $user->id)->get();
         return view('admin.product.index', compact('products'));
     }
 
@@ -41,10 +43,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $request['slug'] = $this->slugify($request->slug);
         $request['active'] = 'on' === $request->active;
         $image = $this->uploadImage($request->file('featured_image'));
         $request['image'] = $image;
+        $request['user_id'] = $user->id;
         
         Product::create($request->all());
         return redirect()->back()->with(['info' => 'Data produk berhasil di tambahkan']);

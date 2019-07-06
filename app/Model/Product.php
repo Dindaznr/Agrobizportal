@@ -13,9 +13,8 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'created_by', 'updated_by',
-        'name', 'slug', 'description', 'image', 'price', 'stock', 'active',
-        'rate_count', 'sale_counts'
+        'user_id', 'name', 'slug', 'description', 'image', 'price',
+        'stock', 'active', 'rate_count', 'sale_counts'
     ];
 
     /**
@@ -36,5 +35,10 @@ class Product extends Model
 	public function orderItem()
 	{
 		return $this->hasMany(OrderDetail::class);
-	}
+    }
+    
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
