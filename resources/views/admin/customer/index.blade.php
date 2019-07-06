@@ -18,7 +18,6 @@
             <th scope="col">Total Transaksi Selesai</th>
             <th scope="col">Total Transaksi Di Batalkan</th>
             <th scope="col">Active</th>
-            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -38,18 +37,6 @@
             <td>{{ $customer->success_orders->count() }}</td>
             <td>{{ $customer->cancelled_orders->count() }}</td>
             <td>{{ true == $customer->active ? 'Ya' : 'Tidak' }}</td>
-            <td>
-                <button
-                    id="btnGroupDropOption"
-                    type="button"
-                    class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span data-feather="menu"></span>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDropOption">
-                    <a class="dropdown-item "href="#">-</a>
-                </div>
-            </td>
         </tr>
         @endforeach
     </tbody>
