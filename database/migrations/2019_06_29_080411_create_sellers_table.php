@@ -20,7 +20,7 @@ class CreateSellersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('slug');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->text('image')->nullable();
             $table->boolean('active')->default(1);
 

@@ -23,9 +23,16 @@ class AuthController extends Controller
             $status = "Email Anda berhasil diverifikasi. Anda sekarang dapat login.";
             if (!$user->email_verified_at) {
                 $verifyUser->user->email_verified_at = new \DateTime();
-                $verifyUser->user->customer->active = 1;
-                
-                $verifyUser->user->customer->save();
+                if ($verifyUser->user->customer) {
+                    $verifyUser->user->customer->active = 1;
+                    $verifyUser->user->customer->save();
+                }
+
+                if ($verifyUser->user->seller) {
+                    $verifyUser->user->seller->active = 1;
+                    $verifyUser->user->seller->save();
+                }
+
                 $verifyUser->user->save();
                 $status = "Email Anda sudah diverifikasi. Anda sudah dapat login.";
             }

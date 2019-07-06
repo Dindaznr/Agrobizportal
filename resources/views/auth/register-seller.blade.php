@@ -5,10 +5,10 @@
     <div class="row justify-content-center" style="min-height: 500px; margin-top: 100px;">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header text-center">Halo, ayo isi detail tokomu sekarang!</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}" autocomplete="off">
+                    <form method="POST" action="{{ route('register.seller') }}" aria-label="{{ __('Register') }}" autocomplete="off">
                         @csrf
 
                         <div class="form-group row">
@@ -26,19 +26,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="gender" class="col-md-4 col-form-label text-md-right">Jenis Kelamin</label>
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                             <div class="col-md-6">
-                                <select id="gender"
-                                    class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                    name="gender" value="{{ old('gender') }}" required autofocus>
-                                    <option value="pria">Pria</option>
-                                    <option value="wanita">Wanita</option>
-                                </select>
-                                
-                                @if ($errors->has('gender'))
+                                <textarea
+                                    id="description" 
+                                    class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
+                                    name="description"
+                                    autofocus>
+                                    {{ old('description') }}
+                                </textarea>
+                                <small id="emailHelp" class="form-text text-muted">Opsional.</small>
+                                @if ($errors->has('description'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('gender') }}</strong>
+                                        <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -80,18 +81,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="remember">
-                                        Tertarik jadi Seller di {{ config('app.name') }} ?
-                                    </label>
-                                    <label class="form-check-label" for="remember">
-                                            <a href="{{ url('register/seller') }}">Yuk daftar sekarang, Gratis.</a>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                        <input type="hidden" name="role" value="seller">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

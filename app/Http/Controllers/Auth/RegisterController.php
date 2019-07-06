@@ -6,6 +6,7 @@ use DB;
 use Exception;
 use App\Model\User;
 use App\Model\Customer;
+use App\Model\Seller;
 use App\Model\VerifyUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -77,6 +78,22 @@ class RegisterController extends Controller
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath())->with('status', 'Silahkan cek email Anda untuk memverifikasi sebelum login.');
     }
+    
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function registerSeller(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->createSeller($request->all()) ));
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath())->with('status', 'Silahkan cek email Anda untuk memverifikasi sebelum login.');
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -106,6 +123,36 @@ class RegisterController extends Controller
 
         $user->sendVerificationEmail($user, $verifyUser->token);
     }
+    
+    /**
+     * Create a new user seller instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function createSeller(array $data)
+    {
+        $user = User::create([
+            'role' => 'seller',
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        Seller::create([
+            'user_id' => $user->id,
+            'name' => $data['name'],
+            'slug' => $this->slugify($data['name']),
+            'description' => $data['description'],
+            'active' => false
+        ]);
+
+        $verifyUser = VerifyUser::create([
+            'user_id' => $user->id,
+            'token' => str_random(40)
+        ]);
+
+        $user->sendVerificationEmail($user, $verifyUser->token);
+    }
 
     /**
      * The user has been registered.
@@ -117,5 +164,32 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         //
+    }
+
+    public function slugify ($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }

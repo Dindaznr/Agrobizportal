@@ -12,6 +12,10 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/register/seller', function () {
+    return view('auth.register-seller');
+});
+Route::name('register.seller')->post('/register/seller', 'Auth\RegisterController@registerSeller');
 
 Auth::routes();
 
