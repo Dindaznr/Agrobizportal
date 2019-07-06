@@ -84,7 +84,7 @@
                 @endif
             </td>
             <td>
-                @if($order->status !== 'cancelled' AND $order->status !== 'closed' AND $order->status !== 'sent' AND $order->status !== 'paid_verified')
+                @if($order->status !== 'cancelled' AND $order->status !== 'closed' AND $order->status !== 'pending' AND $order->status !== 'sent' AND $order->status !== 'paid_verified')
                 <button
                     id="btnGroupDropOption"
                     type="button"

@@ -36,6 +36,16 @@ class Customer extends Model
 		return $this->hasMany(Order::class);
     }
     
+    public function success_orders()
+	{
+		return $this->orders()->where('status','=', 'closed');
+    }
+    
+    public function cancelled_orders()
+	{
+		return $this->orders()->where('status','=', 'cancelled');
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

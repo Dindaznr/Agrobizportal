@@ -20,7 +20,7 @@
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ Auth::user()->customer->name }}</h5>
                             <p class="card-text">{{ Auth::user()->customer->address->name }}</p>
-                            <a href="#" class="btn btn-primary">Ubah profile</a>
+                            <!-- <a href="#" class="btn btn-primary">Ubah profile</a> -->
                         </div>
                     </div>
                 </div>
