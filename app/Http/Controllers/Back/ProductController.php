@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use ImageController;
 use App\Model\Product;
 use App\Model\Category;
 use Illuminate\Http\Request;
@@ -42,8 +43,8 @@ class ProductController extends Controller
     {
         $request['slug'] = $this->slugify($request->slug);
         $request['active'] = 'on' === $request->active;
-        // dd($request->file('image'));
-        // dd($request->all());
+        $image = $this->uploadImage($request->file('featured_image'));
+        $request['image'] = $image;
         
         Product::create($request->all());
         return redirect()->back()->with(['info' => 'Data produk berhasil di tambahkan']);
@@ -104,7 +105,7 @@ class ProductController extends Controller
     protected function uploadImage($file = null)
     {
         if (!is_null($file)) {
-            return ImageController::upload($file, $this->staticPageImageFileStorage);
+            return ImageController::upload($file, 'product-sample/upload');
         }
     }
 

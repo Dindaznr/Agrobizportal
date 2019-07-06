@@ -35,17 +35,17 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="image">Product Image</label>
-        <input type="file" name="image" class="form-control-file" id="image">
+        <label for="featured_image">Product Image</label>
+        <input type="file" name="featured_image" class="form-control-file" id="featured_image">
     </div>
     <div class="form-row">
         <div class="form-group col-md-3">
             <label for="price">Price</label>
-            <input type="text" name="price" class="form-control" id="price" placeholder="Product Price">
+            <input type="number" name="price" class="form-control" id="price" placeholder="1000" min="1000">
         </div>
         <div class="form-group col-md-3">
             <label for="stock">Stock</label>
-            <input type="text" name="stock" class="form-control" id="stock" placeholder="Product Stock">
+            <input type="number" name="stock" class="form-control" id="stock" placeholder="1" min="1">
         </div>
     </div>
     <label for="slug">Product Activated</label>

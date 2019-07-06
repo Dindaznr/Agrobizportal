@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description', 500);
-            $table->string('image', 100)->nullable();
+            $table->text('image')->nullable();
             $table->integer('price');
             $table->integer('stock')->default(1);
             $table->boolean('active')->default(1);

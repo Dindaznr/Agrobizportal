@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'role' => 'customer',
-                // 'email' => 'eka@medigo.id',
-                'email' => 'rahmannisa20@gmail.com',
+                'email' => 'eka@medigo.id',
+                // 'email' => 'rahmannisa20@gmail.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => new \DateTime()
             ],
