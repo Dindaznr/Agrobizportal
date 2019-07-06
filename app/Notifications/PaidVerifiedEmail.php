@@ -58,7 +58,7 @@ class PaidVerifiedEmail extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                 ->subject(__('Checkout Pesanan transfer bank Berhasil tanggal '. Carbon::now()->format('d/m/Y')))
-                ->greeting(__('Pesanan Anda telah kami teruskan ke Penjual'))
+                ->greeting(__('Pesanan Anda sedang dalam proses'))
                 ->line(__('Hallo '. $this->user->customer->name))
                 ->line(__('Terima kasih telah menyelesaikan transaksi di Agrobizportal. Pembayaran menggunakan transfer bank berhasil.'))
                 ->action(__('Check status order Anda'), url('people/order'))
