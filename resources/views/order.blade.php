@@ -31,7 +31,20 @@
                                 <tbody>
                                     @if(count($orders) > 0)
                                         @foreach($orders as $no => $order)
-                                        <tr class="{{ $order->status === 'cancelled' ? 'table-warning' : ''}}">
+                                        <?php
+                                            $trColor = '';
+                                            $trTitile = '';
+                                            if($order->status == 'open' AND $order->payment == 'transfer') {
+                                                $trColor = 'table-info';
+                                                $trTitile = 'harap lakukan konfirmasi setelah melakukan transfer';
+                                            }
+
+                                            if ($order->status === 'cancelled') {
+                                                $trColor = 'table-warning';
+                                                $trTitile = 'transaksi anda di batalkan';
+                                            } 
+                                        ?>
+                                        <tr class="{{ $trColor }}" title="{{ $trTitile }}">
                                             <th scope="row">{{ $no +=1 }}</th>
                                             <td>
                                                 <a data-toggle="collapse" href="#collapseOrder_{{$no}}" role="button" aria-expanded="false" aria-controls="collapseOrder_{{$no}}">

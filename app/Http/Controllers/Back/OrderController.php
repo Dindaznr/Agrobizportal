@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Model\Order;
+use App\Model\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -87,6 +88,12 @@ class OrderController extends Controller
             $order = Order::find($request->id);
             $order->status = $request->status;
             $order->save();
+
+            if ($request->status === 'paid_verified')
+            {
+                $customer = Customer::find($order->customer_id);
+                $customer->user->PaidVerifiedEmail($customer->user, $order);
+            }
 
             return $order;
         }

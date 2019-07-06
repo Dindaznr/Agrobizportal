@@ -178,7 +178,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     <span data-feather="file-text"></span>
-                    Laporan Penjualan
+                      Laporan Penjualan
                   </a>
                 </li>
               @endseller
@@ -186,7 +186,7 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     <span data-feather="file-text"></span>
-                    Laporan
+                      Laporan
                   </a>
                 </li>
               @endadmin

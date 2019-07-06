@@ -23,7 +23,20 @@
     </thead>
     <tbody>
         @foreach($orders as $no => $order)
-        <tr class="{{ $order->status === 'cancelled' ? 'table-danger' : ''}}">
+        <?php
+            $trColor = '';
+            $trTitile = '';
+            if($order->status == 'paid' AND $order->payment == 'transfer') {
+                $trColor = 'table-info';
+                $trTitile = 'harap lakukan verifikasi pembayaran Customer';
+            }
+
+            if ($order->status === 'cancelled') {
+                $trColor = 'table-danger';
+                $trTitile = 'transaksi customer di batalkan';
+            } 
+        ?>
+        <tr class="{{ $trColor }}" title="{{ $trTitile }}">
             <th scope="row">1</th>
             <td>{{ $order->customer->name }}</td>
             <td>{{ $order->code }}</td>
