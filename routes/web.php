@@ -40,7 +40,7 @@ Route::namespace('Front')->group(function () {
         Route::name('order.store')->post('order/store', 'OrderController@store');
     
         // People
-        Route::prefix('people')->group(function () {
+        Route::prefix('people')->middleware('customer')->group(function () {
             Route::name('people.index')->get('', 'ProfileController@index');
             Route::name('people.order')->get('order', 'OrderController@index');
             Route::get('address', 'ProfileController@address');
@@ -58,8 +58,14 @@ Route::prefix('admin')->namespace('Back')->group(function () {
         Route::resource('orders', 'OrderController');
         Route::patch('orders/update', 'OrderController@update');
         Route::get('payment', 'OrderController@payment')->name('orders.payment');
-        Route::resource('products', 'ProductController');
-        Route::resource('categories', 'CategoryController');
-        Route::resource('customers', 'CustomerController');
+        
+        Route::middleware('seller')->group(function () {
+            Route::resource('products', 'ProductController');
+            Route::resource('categories', 'CategoryController');
+        });
+        
+        Route::middleware('admin')->group(function () {
+            Route::resource('customers', 'CustomerController');
+        });
     });
 });
