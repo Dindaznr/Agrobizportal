@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use PDF;
+use Carbon\Carbon;
 use App\Model\Product;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -19,9 +20,20 @@ class ReportController extends Controller
     public function sales(Request $request)
     {
         $products = Product::with([
-            'orderItem' => function ($query) {
-                $query->whereHas('order', function ($q) {
+            'orderItem' => function ($query) use($request) {
+                $query->whereHas('order', function ($q) use($request) {
+                    $startDate = Carbon::now()->toDateString();
+                    if ($request->has('start_date')) {
+                        $startDate = Carbon::parse($request->start_date)->toDateString();
+                    }
+                    
+                    $endDate = Carbon::now()->endOfMonth()->subMonth()->endOfMonth()->toDateString();
+                    if ($request->has('end_date')) {
+                        $endDate = Carbon::parse($request->end_date)->toDateString();
+                    }
+                    
                     $q->whereStatus('closed');
+                    $q->whereBetween('updated_at', [ $startDate, $endDate ]);
                 });
             }
         ])->get();
@@ -32,9 +44,20 @@ class ReportController extends Controller
     public function exportSales(Request $request)
     {
         $products = Product::with([
-            'orderItem' => function ($query) {
-                $query->whereHas('order', function ($q) {
+            'orderItem' => function ($query) use($request) {
+                $query->whereHas('order', function ($q) use($request) {
+                    $startDate = Carbon::now()->toDateString();
+                    if ($request->has('start_date')) {
+                        $startDate = Carbon::parse($request->start_date)->toDateString();
+                    }
+                    
+                    $endDate = Carbon::now()->endOfMonth()->subMonth()->endOfMonth()->toDateString();
+                    if ($request->has('end_date')) {
+                        $endDate = Carbon::parse($request->end_date)->toDateString();
+                    }
+
                     $q->whereStatus('closed');
+                    $q->whereBetween('updated_at', [ $startDate, $endDate ]);
                 });
             }
         ])->get();
@@ -51,9 +74,20 @@ class ReportController extends Controller
     public function income(Request $request)
     {
         $products = Product::with([
-            'orderItem' => function ($query) {
-                $query->whereHas('order', function ($q) {
+            'orderItem' => function ($query) use($request) {
+                $query->whereHas('order', function ($q) use($request) {
+                    $startDate = Carbon::now()->toDateString();
+                    if ($request->has('start_date')) {
+                        $startDate = Carbon::parse($request->start_date)->toDateString();
+                    }
+                    
+                    $endDate = Carbon::now()->endOfMonth()->subMonth()->endOfMonth()->toDateString();
+                    if ($request->has('end_date')) {
+                        $endDate = Carbon::parse($request->end_date)->toDateString();
+                    }
+
                     $q->whereStatus('closed');
+                    $q->whereBetween('updated_at', [ $startDate, $endDate ]);
                 });
             }
         ])->get();
@@ -64,9 +98,20 @@ class ReportController extends Controller
     public function exportIncome(Request $request)
     {
         $products = Product::with([
-            'orderItem' => function ($query) {
-                $query->whereHas('order', function ($q) {
+            'orderItem' => function ($query) use($request) {
+                $query->whereHas('order', function ($q) use($request) {
+                    $startDate = Carbon::now()->toDateString();
+                    if ($request->has('start_date')) {
+                        $startDate = Carbon::parse($request->start_date)->toDateString();
+                    }
+                    
+                    $endDate = Carbon::now()->endOfMonth()->subMonth()->endOfMonth()->toDateString();
+                    if ($request->has('end_date')) {
+                        $endDate = Carbon::parse($request->end_date)->toDateString();
+                    }
+
                     $q->whereStatus('closed');
+                    $q->whereBetween('updated_at', [ $startDate, $endDate ]);
                 });
             }
         ])->get();
@@ -82,10 +127,21 @@ class ReportController extends Controller
     public function delivery(Request $request)
     {
         $products = Product::with([
-            'orderItem' => function ($query) {
-                $query->whereHas('order', function ($q) {
+            'orderItem' => function ($query) use($request) {
+                $query->whereHas('order', function ($q) use($request) {
+                    $startDate = Carbon::now()->toDateString();
+                    if ($request->has('start_date')) {
+                        $startDate = Carbon::parse($request->start_date)->toDateString();
+                    }
+                    
+                    $endDate = Carbon::now()->endOfMonth()->subMonth()->endOfMonth()->toDateString();
+                    if ($request->has('end_date')) {
+                        $endDate = Carbon::parse($request->end_date)->toDateString();
+                    }
+                    
                     $q->whereStatus('closed');
                     $q->where('payment', 'transfer');
+                    $q->whereBetween('updated_at', [ $startDate, $endDate ]);
                 });
             }
         ])->get();
@@ -95,10 +151,21 @@ class ReportController extends Controller
     public function exportDelivery(Request $request)
     {
         $products = Product::with([
-            'orderItem' => function ($query) {
-                $query->whereHas('order', function ($q) {
+            'orderItem' => function ($query) use($request) {
+                $query->whereHas('order', function ($q) use($request) {
+                    $startDate = Carbon::now()->toDateString();
+                    if ($request->has('start_date')) {
+                        $startDate = Carbon::parse($request->start_date)->toDateString();
+                    }
+                    
+                    $endDate = Carbon::now()->endOfMonth()->subMonth()->endOfMonth()->toDateString();
+                    if ($request->has('end_date')) {
+                        $endDate = Carbon::parse($request->end_date)->toDateString();
+                    }
+
                     $q->whereStatus('closed');
                     $q->where('payment', 'transfer');
+                    $q->whereBetween('updated_at', [ $startDate, $endDate ]);
                 });
             }
         ])->get();

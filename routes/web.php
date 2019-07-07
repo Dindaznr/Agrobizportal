@@ -71,6 +71,7 @@ Route::prefix('admin')->namespace('Back')->group(function () {
             Route::name('reports.income.export')->get('/reports/income/export', 'ReportController@exportIncome');
 
             Route::name('reports.delivery')->get('/reports/delivery', 'ReportController@delivery');
+            Route::name('reports.delivery.search')->get('/reports/delivery/search', 'ReportController@delivery');
             Route::name('reports.delivery.export')->get('/reports/delivery/export', 'ReportController@exportDelivery');
         });
 

@@ -29,49 +29,62 @@
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <!-- <button class="btn btn-sm btn-outline-secondary">Share</button> -->
-            <button
-                onclick="window.location.href = '{{ route('reports.delivery.export') }}';"
-                class="btn btn-sm btn-outline-secondary">
-                Export
-            </button>
+            <form method="get" action="{{ route('reports.delivery.export') }}">
+                @csrf
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="name">Dari</label>
+                        <input type="text" name="start_date" class="form-control start_date" id="name" placeholder="2019-12-20">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="name">Ke</label>
+                        <input type="text" name="end_date" class="form-control end_date" id="name" placeholder="2019-12-20">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <button
+                        type="submit"
+                        class="btn btn-sm btn-outline-secondary">
+                        Export
+                    </button>
+                </div>
+            </form>
         </div>
-        <!-- <button id="btnGroupDropOptionFilter"
+        <button id="btnGroupDropOptionFilter"
             type="button"
             class="btn btn-sm btn-outline-secondary dropdown-toggle"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span data-feather="calendar"></span>
             Filter Berdasarkan Tanggal
-        </button> -->
+        </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDropOptionFilter">
-            <li>
-                <a class="dropdown-item filter-all" data-id="0" href="{{ route('reports.delivery') }}">
-                    Keseluruhan
-                </a>
-            </li>
             <li class="dropdown-submenu">
                 <a class="dropdown-item dropdown-toggle">
                 Berdasarkan tanggal
                 </a>
                 <div class="dropdown-menu">
                     <form method="get" action="{{ route('reports.delivery') }}">
-                    @csrf
-                    <div class="form-row">
-                        <div class="form-group col-md-10">
-                            <label for="name">Dari</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Category Name">
+                        <div class="form-row">
+                            <div class="form-group col-md-10">
+                                <label for="name">Dari</label>
+                                <input type="text" name="start_date" class="form-control start_date" id="name" placeholder="2019-12-20">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group col-md-10">
-                            <label for="name">Ke</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Category Name">
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-10">
+                                <label for="name">Ke</label>
+                                <input type="text" name="end_date" class="form-control end_date" id="name" placeholder="2019-12-20">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
+                        
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
                     </form>
                 </div>
             </li>
@@ -130,5 +143,7 @@ $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
 
   return false;
 });
+
+
 </script>
 @endsection
