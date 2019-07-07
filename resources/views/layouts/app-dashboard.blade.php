@@ -184,12 +184,12 @@
                 @request('admin/reports/sales')
                   <a class="nav-link active" href="#">
                     <span data-feather="file-text"></span>
-                      Laporan Penjualan <span data-feather="shield"></span>
+                      Laporan Penjualan
                   </a>
                 @else
                   <a class="nav-link" href="{{ route('reports.sales') }}">
                     <span data-feather="file-text"></span>
-                      Laporan Penjualan <span data-feather="shield"></span>
+                      Laporan Penjualan
                   </a>
                 @endrequest
               </li>
@@ -198,26 +198,26 @@
                 @request('admin/reports/income')
                   <a class="nav-link active" href="#">
                     <span data-feather="file-text"></span>
-                      Laporan Pendapatan <span data-feather="shield-off"></span>
+                      Laporan Pendapatan
                   </a>
                 @else
-                  <a class="nav-link" href="{{ route('reports.income') }}" style="color: red;">
-                    <span data-feather="file-text" style="color: red;"></span>
-                      Laporan Pendapatan <span data-feather="shield-off" style="color: red;"></span>
+                  <a class="nav-link" href="{{ route('reports.income') }}">
+                    <span data-feather="file-text"></span>
+                      Laporan Pendapatan
                   </a>
                 @endrequest
               </li>
               
               <li class="nav-item">
-                @request('admin/reports/income')
+                @request('admin/reports/delivery')
                   <a class="nav-link active" href="#">
                     <span data-feather="file-text"></span>
-                      Laporan Pengiriman <span data-feather="shield-off"></span>
+                      Laporan Pengiriman
                   </a>
                 @else
-                  <a class="nav-link" href="{{ route('reports.income') }}" style="color: red;">
-                    <span data-feather="file-text" style="color: red;"></span>
-                      Laporan Pengiriman <span data-feather="shield-off" style="color: red;"></span>
+                  <a class="nav-link" href="{{ route('reports.delivery') }}">
+                    <span data-feather="file-text"></span>
+                      Laporan Pengiriman
                   </a>
                 @endrequest
               </li>

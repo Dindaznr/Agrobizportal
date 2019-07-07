@@ -30,7 +30,7 @@
         <div class="btn-group mr-2">
             <!-- <button class="btn btn-sm btn-outline-secondary">Share</button> -->
             <button
-                onclick="window.location.href = '{{ route('reports.sales.export') }}';"
+                onclick="window.location.href = '{{ route('reports.delivery.export') }}';"
                 class="btn btn-sm btn-outline-secondary">
                 Export
             </button>
@@ -44,7 +44,7 @@
         </button> -->
         <div class="dropdown-menu" aria-labelledby="btnGroupDropOptionFilter">
             <li>
-                <a class="dropdown-item filter-all" data-id="0" href="{{ route('reports.sales') }}">
+                <a class="dropdown-item filter-all" data-id="0" href="{{ route('reports.delivery') }}">
                     Keseluruhan
                 </a>
             </li>
@@ -53,7 +53,7 @@
                 Berdasarkan tanggal
                 </a>
                 <div class="dropdown-menu">
-                    <form method="get" action="{{ route('reports.sales') }}">
+                    <form method="get" action="{{ route('reports.delivery') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-10">
@@ -79,42 +79,34 @@
     </div>
 </div>
 
-<h2 class="h3">Rekap Total Penjualan Product</h2>
+<h2 class="h3">Rekap Total Pengiriman</h2>
 <div class="table-responsive">
-    <table class="table table-sm">
+    <table class="table table-sm text-center">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Product</th>
-                <th>Total Penjualan (Unit)</th>
-                <th>Total Penjualan (Rupiah)</th>
-                <th>Transaksi (Unit)</th>
+                <th>Transaksi Pengiriman</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-                $totalSales = 0;
-                $totalTransaction = 0;
-            ?>
+            @php
+                $total = 0;
+            @endphp
             @foreach($products as $no => $product)
             <tr>
                 <td>{{ $no += 1 }}</td>
-                <td>{{ $product['name'] }}</td>
-                <td>{{ $product['sale_counts'] }}</td>
-                <td>{{ number_format($product['price'] * $product['sale_counts']) }}</td>
+                <td>{{ $product->name }}</td>
                 <td>{{ count($product->orderItem) }}</td>
-                <?php
-                   $totalSales += $product['price'] * $product['sale_counts']; 
-                   $totalTransaction += count($product->orderItem);
-                ?>
+                @php
+                    $total += count($product->orderItem)
+                @endphp
             </tr>
             @endforeach
             <tr>
                 <th scope="row">Total: </th>
                 <td colspan="1"></td>
-                <td>{{ $products->sum('sale_counts') }}</td>
-                <td >Rp. {{ number_format( $totalSales ) }}</td>
-                <td>{{ $totalTransaction }}</td>
+                <td>{{ $total }}</td>
             </tr>
         </tbody>
     </table>

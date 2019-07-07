@@ -50,7 +50,28 @@ class ReportController extends Controller
      */
     public function income(Request $request)
     {
-        return 'comming soon';
+        $products = Product::with([
+            'orderItem' => function ($query) {
+                $query->whereHas('order', function ($q) {
+                    $q->whereStatus('closed');
+                });
+            }
+        ])->get();
+
+        return view('admin.report.income', compact('products'));
+    }
+
+    public function exportIncome(Request $request)
+    {
+        $products = Product::with([
+            'orderItem' => function ($query) {
+                $query->whereHas('order', function ($q) {
+                    $q->whereStatus('closed');
+                });
+            }
+        ])->get();
+        $pdf = PDF::loadView('admin.report.income_pdf', ['products' => $products]);
+        return $pdf->stream();
     }
     
     /**
@@ -60,6 +81,28 @@ class ReportController extends Controller
      */
     public function delivery(Request $request)
     {
-        return 'comming soon';
+        $products = Product::with([
+            'orderItem' => function ($query) {
+                $query->whereHas('order', function ($q) {
+                    $q->whereStatus('closed');
+                    $q->where('payment', 'transfer');
+                });
+            }
+        ])->get();
+        return view('admin.report.delivery', compact('products'));
+    }
+
+    public function exportDelivery(Request $request)
+    {
+        $products = Product::with([
+            'orderItem' => function ($query) {
+                $query->whereHas('order', function ($q) {
+                    $q->whereStatus('closed');
+                    $q->where('payment', 'transfer');
+                });
+            }
+        ])->get();
+        $pdf = PDF::loadView('admin.report.delivery_pdf', ['products' => $products]);
+        return $pdf->stream();
     }
 }

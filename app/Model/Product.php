@@ -39,6 +39,22 @@ class Product extends Model
 	{
 		return $this->hasMany(OrderDetail::class);
     }
+
+    public function transfer_orders()
+	{
+		return $this->orderItem()->whereHas('order', function ($q) {
+            $q->whereStatus('closed');
+            $q->where('payment', 'transfer');
+        });
+    }
+    
+    public function cod_orders()
+	{
+		return $this->orderItem()->whereHas('order', function ($q) {
+            $q->whereStatus('closed');
+            $q->where('payment', 'cod');
+        });
+    }
     
     public function owner()
     {

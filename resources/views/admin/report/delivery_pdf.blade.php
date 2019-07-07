@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan Penjualan</title>
+    <title>Laporan Transaksi Pengiriman Per Produk</title>
     <style>
         
         .table-responsive {
@@ -10,6 +10,10 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
+
+        .text-center {
+            text-align: center!important;
         }
 
         .table {
@@ -122,7 +126,7 @@
 </head>
 <body>
 	<center>
-        <h2 class="h3 margin-bottom">Rekap Total Penjualan Product</h2>
+        <h2 class="h3 margin-bottom">Rekap Total Transaksi Pengiriman Per Produk</h2>
 	</center>
     <header>
         <h4>Agrobizportal</h4>
@@ -134,40 +138,32 @@
     </header>
     <article>
         <div class="table-responsive">
-            <table class="table table-sm">
+            <table class="table table-sm text-center">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Product</th>
-                        <th>Total Penjualan (Unit)</th>
-                        <th>Total Penjualan (Rupiah)</th>
-                        <th>Transaksi (Unit)</th>
+                        <th>Transaksi Pengiriman</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
-                        $totalSales = 0;
-                        $totalTransaction = 0;
+                        $total = 0;
                     @endphp
                     @foreach($products as $no => $product)
                     <tr>
                         <td>{{ $no += 1 }}</td>
-                        <td>{{ $product['name'] }}</td>
-                        <td>{{ $product['sale_counts'] }}</td>
-                        <td>{{ number_format($product['price'] * $product['sale_counts']) }}</td>
+                        <td>{{ $product->name }}</td>
                         <td>{{ count($product->orderItem) }}</td>
-                        <?php
-                        $totalSales += $product['price'] * $product['sale_counts']; 
-                        $totalTransaction += count($product->orderItem);
-                        ?>
+                        @php
+                            $total += count($product->orderItem)
+                        @endphp
                     </tr>
                     @endforeach
                     <tr>
                         <th scope="row">Total: </th>
                         <td colspan="1"></td>
-                        <td>{{ $products->sum('sale_counts') }}</td>
-                        <td >Rp. {{ number_format( $totalSales ) }}</td>
-                        <td>{{ $totalTransaction }}</td>
+                        <td>{{ $total }}</td>
                     </tr>
                 </tbody>
             </table>
