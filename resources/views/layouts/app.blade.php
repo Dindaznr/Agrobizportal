@@ -23,6 +23,11 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <style>
+        .dropdown:hover>.dropdown-menu {
+            display: block;
+        }
+    </style>
     @yield('css')
 </head>
 <body>
@@ -51,6 +56,18 @@
                             </a>
                         </li>
                         @endrequest
+                        
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Category
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownCategory">
+                                @foreach($categories as $category)
+                                   <a class="dropdown-item" href="{{ $category->slug }}">{{ $category->name }}</a>
+                                @endforeach
+                            </div>
+                        </li>
 
                         @if(Auth::user())
                             @customer
