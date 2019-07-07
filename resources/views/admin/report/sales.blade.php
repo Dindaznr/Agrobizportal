@@ -44,7 +44,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="btnGroupDropOptionFilter">
             <li>
-                <a class="dropdown-item filter-all" data-id="0" href="#">
+                <a class="dropdown-item filter-all" data-id="0" href="{{ route('reports.sales') }}">
                     Keseluruhan
                 </a>
             </li>
