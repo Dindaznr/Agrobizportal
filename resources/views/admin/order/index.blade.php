@@ -5,7 +5,7 @@
     <h1 class="h2">Order</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary">Export</button>
+            <!-- <button class="btn btn-sm btn-outline-secondary">Export</button> -->
         </div>
     </div>
 </div>
@@ -100,7 +100,7 @@
                     @endif
                     @if($order->status == 'pending')
                     <a class="dropdown-item update-order-sent" data-id="{{ $order->id }}" href="#">
-                        Pengiriman Pesanan
+                        Kirim Pesanan
                     </a>
                     @endif
                     @if($order->status == 'received')

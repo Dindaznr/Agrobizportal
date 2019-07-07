@@ -1,4 +1,3 @@
-
 @section('css')
 <style>
 .dropdown-submenu {
@@ -30,7 +29,11 @@
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <!-- <button class="btn btn-sm btn-outline-secondary">Share</button> -->
-            <button class="btn btn-sm btn-outline-secondary">Export</button>
+            <button
+                onclick="window.location.href = '{{ route('reports.sales.export') }}';"
+                class="btn btn-sm btn-outline-secondary">
+                Export
+            </button>
         </div>
         <button id="btnGroupDropOptionFilter"
             type="button"
@@ -43,21 +46,6 @@
             <li>
                 <a class="dropdown-item filter-all" data-id="0" href="#">
                     Keseluruhan
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item filter-this-month" data-id="1" href="#">
-                    Bulan Ini
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item filter-this-month" data-id="2" href="#">
-                    Minggu Ini
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item filter-this-today" data-id="3" href="#">
-                    Hari Ini
                 </a>
             </li>
             <li class="dropdown-submenu">
@@ -100,7 +88,7 @@
                 <th>Product</th>
                 <th>Total Penjualan (Unit)</th>
                 <th>Total Penjualan (Rupiah)</th>
-                <th>Transaksi</th>
+                <th>Transaksi (Unit)</th>
             </tr>
         </thead>
         <tbody>
@@ -122,7 +110,7 @@
             </tr>
             @endforeach
             <tr>
-                <th scope="row">Subtotal: </th>
+                <th scope="row">Total: </th>
                 <td colspan="1"></td>
                 <td>{{ $products->sum('sale_counts') }}</td>
                 <td >Rp. {{ number_format( $totalSales ) }}</td>
