@@ -66,6 +66,7 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
+              <!-- Seller -->
               @seller
               <li class="nav-item">
                 @request('admin')
@@ -121,7 +122,9 @@
                 @endrequest
               </li>
               @endseller
+              <!-- End Seller -->
 
+              <!-- Admin -->
               @admin
               <li class="nav-item">
                 @request('admin')
@@ -165,6 +168,7 @@
                 @endrequest
               </li>
               @endadmin
+              <!-- End Admin -->
             </ul>
 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -174,14 +178,53 @@
               </a>
             </h6>
             <ul class="nav flex-column mb-2">
+              <!-- Seller -->
               @seller
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
+              <li class="nav-item">
+                @request('admin/reports/sales')
+                  <a class="nav-link active" href="#">
                     <span data-feather="file-text"></span>
-                      Laporan Penjualan
+                      Laporan Penjualan <span data-feather="shield"></span>
                   </a>
-                </li>
+                @else
+                  <a class="nav-link" href="{{ route('reports.sales') }}">
+                    <span data-feather="file-text"></span>
+                      Laporan Penjualan <span data-feather="shield"></span>
+                  </a>
+                @endrequest
+              </li>
+
+              <li class="nav-item">
+                @request('admin/reports/income')
+                  <a class="nav-link active" href="#">
+                    <span data-feather="file-text"></span>
+                      Laporan Pendapatan <span data-feather="shield-off"></span>
+                  </a>
+                @else
+                  <a class="nav-link" href="{{ route('reports.income') }}">
+                    <span data-feather="file-text"></span>
+                      Laporan Pendapatan <span data-feather="shield-off"></span>
+                  </a>
+                @endrequest
+              </li>
+              
+              <li class="nav-item">
+                @request('admin/reports/income')
+                  <a class="nav-link active" href="#">
+                    <span data-feather="file-text"></span>
+                      Laporan Pengiriman <span data-feather="shield-off"></span>
+                  </a>
+                @else
+                  <a class="nav-link" href="{{ route('reports.income') }}">
+                    <span data-feather="file-text"></span>
+                      Laporan Pengiriman <span data-feather="shield-off"></span>
+                  </a>
+                @endrequest
+              </li>
               @endseller
+              <!-- End Seller -->
+
+              <!-- Admin -->
               @admin
                 <li class="nav-item">
                   <a class="nav-link" href="#">
@@ -190,6 +233,7 @@
                   </a>
                 </li>
               @endadmin
+              <!-- And Seller -->
             </ul>
           </div>
         </nav>

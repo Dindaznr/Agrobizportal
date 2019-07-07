@@ -18,8 +18,6 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::all();
-        $orders = Order::where('status', 'closed')->get();
         $products = Product::with([
             'orderItem' => function ($query) {
                 $query->whereHas('order', function ($q) {

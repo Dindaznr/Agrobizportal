@@ -62,8 +62,13 @@ Route::prefix('admin')->namespace('Back')->group(function () {
         Route::middleware('seller')->group(function () {
             Route::resource('products', 'ProductController');
             Route::resource('categories', 'CategoryController');
+            
+            // Route::resource('reports', 'CategoryController');
+            Route::name('reports.sales')->get('/reports/sales', 'ReportController@sales');
+            Route::name('reports.income')->get('/reports/income', 'ReportController@income');
+            Route::name('reports.delivery')->get('/reports/delivery', 'ReportController@delivery');
         });
-        
+
         Route::middleware('admin')->group(function () {
             Route::resource('customers', 'CustomerController');
         });
