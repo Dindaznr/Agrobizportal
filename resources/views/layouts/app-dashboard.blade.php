@@ -201,9 +201,9 @@
                       Laporan Pendapatan <span data-feather="shield-off"></span>
                   </a>
                 @else
-                  <a class="nav-link" href="{{ route('reports.income') }}">
-                    <span data-feather="file-text"></span>
-                      Laporan Pendapatan <span data-feather="shield-off"></span>
+                  <a class="nav-link" href="{{ route('reports.income') }}" style="color: red;">
+                    <span data-feather="file-text" style="color: red;"></span>
+                      Laporan Pendapatan <span data-feather="shield-off" style="color: red;"></span>
                   </a>
                 @endrequest
               </li>
@@ -215,9 +215,9 @@
                       Laporan Pengiriman <span data-feather="shield-off"></span>
                   </a>
                 @else
-                  <a class="nav-link" href="{{ route('reports.income') }}">
-                    <span data-feather="file-text"></span>
-                      Laporan Pengiriman <span data-feather="shield-off"></span>
+                  <a class="nav-link" href="{{ route('reports.income') }}" style="color: red;">
+                    <span data-feather="file-text" style="color: red;"></span>
+                      Laporan Pengiriman <span data-feather="shield-off" style="color: red;"></span>
                   </a>
                 @endrequest
               </li>

@@ -22,9 +22,6 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantity');
             $table->double('price', 10, 2);
             $table->boolean('status')->default(1);
-            
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

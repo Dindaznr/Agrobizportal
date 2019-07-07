@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Tambah Category</h1>
+    <h1 class="h2">Edit Category</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div onclick="window.location.href = '{{ route('categories.index') }}';"
             class="btn-group mr-2">
@@ -24,17 +24,18 @@
         </ol>
     </div>
 @endif
-<form method="post" action="{{ route('categories.store') }}">
+<form method="post" action="{{ route('categories.update', [$category->id]) }}">
+@method('PUT')
 @csrf
-    <div class="form-row">
-        <div class="form-group col-md-3">
+<div class="form-row">
+    <div class="form-group col-md-3">
             <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" id="name" {{ old('name') }} placeholder="Category Name">
+            <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $category->name) }}" placeholder="Category Name">
             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
         <div class="form-group col-md-3">
             <label for="slug">Slug</label>
-            <input type="text" name="slug" class="form-control" id="slug" {{ old('slug') }} placeholder="Category slug">
+            <input type="text" name="slug" class="form-control" id="slug" value="{{ old('slug', $category->slug) }}" placeholder="Category slug">
         </div>
     </div>
     

@@ -33,20 +33,40 @@
             <td>
                 <button
                     title="edit"
-                    onclick="window.location.href = '{{ route('categories.create') }}';"
+                    onclick="window.location.href = '{{ route('categories.edit', [$category->id]) }}';"
                     class="btn btn-sm btn-outline-secondary">
                     <span data-feather="edit-3"></span>
                 </button>
-                <button
+                <a  data-id="{{ $category->id }}"
                     title="hapus"
-                    onclick="window.location.href = '{{ route('categories.create') }}';"
-                    class="btn btn-sm btn-outline-secondary">
+                    class="btn btn-sm btn-outline-secondary hapus">
                     <span data-feather="trash-2"></span>
-                </button>
+                </a>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
 @endsection
-    
+
+@section('js')
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $(".hapus").click(function (e) {
+            e.preventDefault();
+            var ele = $(this);
+            $.ajax({
+                url: '{{ url('admin/categories/') }}' + '/' + ele.attr("data-id"),
+                method: "delete",
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        });
+    });
+
+</script>
+@endsection

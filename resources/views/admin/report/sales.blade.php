@@ -104,6 +104,10 @@
             </tr>
         </thead>
         <tbody>
+            <?php
+                $totalSales = 0;
+                $totalTransaction = 0;
+            ?>
             @foreach($products as $no => $product)
             <tr>
                 <td>{{ $no += 1 }}</td>
@@ -111,14 +115,18 @@
                 <td>{{ $product['sale_counts'] }}</td>
                 <td>{{ number_format($product['price'] * $product['sale_counts']) }}</td>
                 <td>{{ count($product->orderItem) }}</td>
+                <?php
+                   $totalSales += $product['price'] * $product['sale_counts']; 
+                   $totalTransaction += count($product->orderItem);
+                ?>
             </tr>
             @endforeach
             <tr>
                 <th scope="row">Subtotal: </th>
                 <td colspan="1"></td>
-                <td> 22</td>
-                <td >Rp. 100</td>
-                <td>@twitter</td>
+                <td>{{ $products->sum('sale_counts') }}</td>
+                <td >Rp. {{ number_format( $totalSales ) }}</td>
+                <td>{{ $totalTransaction }}</td>
             </tr>
         </tbody>
     </table>

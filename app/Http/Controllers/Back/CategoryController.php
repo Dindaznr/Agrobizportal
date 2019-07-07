@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Model\Category;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,12 +36,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $request['slug'] = $this->slugify($request->slug);
         $request['active'] = 'on' === $request->active;
-
+        
         Category::create($request->all());
+
         return redirect()->back()->with(['info' => 'Data kategori berhasil di tambahkan']);
     }
 
@@ -61,9 +63,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit', compact ('category'));
     }
 
     /**
@@ -73,9 +75,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $request['slug'] = $this->slugify($request->slug);
+        $request['active'] = 'on' === $request->active;
+        $category->update($request->all());
+
+        return redirect()->route('categories.index')->with(['info' => 'Data kategori berhasil di ubah']);
     }
 
     /**
@@ -84,9 +90,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy (Category $category)
     {
-        //
+        $category->delete();
     }
 
     public function slugify ($text)

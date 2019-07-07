@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Tambah Product</h1>
+    <h1 class="h2">Edit Product</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div onclick="window.location.href = '{{ route('products.index') }}';"
             class="btn-group mr-2">
@@ -24,23 +24,24 @@
         </ol>
     </div>
 @endif
-<form method="post" action="{{ route('products.store') }}" enctype="multipart/form-data" autocomplete="off">
+<form method="post" action="{{ route('products.update', [$product->id]) }}" enctype="multipart/form-data" autocomplete="off">
+@method('PUT')
 @csrf
     <div class="form-row">
         <div class="form-group col-md-3">
             <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" id="name" placeholder="Product Name">
+            <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $product->name) }}" placeholder="Product Name">
             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
         <div class="form-group col-md-3">
             <label for="slug">Slug</label>
-            <input type="text" name="slug" class="form-control" id="slug" placeholder="Product-slug">
+            <input type="text" name="slug" class="form-control" id="slug" value="{{ old('slug', $product->slug) }}" placeholder="Product-slug">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="description">Description</label>
-            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+            <textarea name="description" class="form-control" id="description" rows="3">{{ old('description', $product->description) }}</textarea>
         </div>
     </div>
     <div class="form-group">
@@ -50,11 +51,11 @@
     <div class="form-row">
         <div class="form-group col-md-3">
             <label for="price">Price</label>
-            <input type="number" name="price" class="form-control" id="price" placeholder="1000" min="1000">
+            <input type="number" name="price" class="form-control" id="price" value="{{ old('price', $product->price) }}" placeholder="1000" min="1000">
         </div>
         <div class="form-group col-md-3">
             <label for="stock">Stock</label>
-            <input type="number" name="stock" class="form-control" id="stock" placeholder="1" min="1">
+            <input type="number" name="stock" class="form-control" id="stock" value="{{ old('stock', $product->stock) }}" placeholder="1" min="1">
         </div>
     </div>
     <label for="slug">Product Activated</label>
@@ -74,9 +75,9 @@
         <div class="form-group col-md-3">
             <label for="category">Category</label>
             <select name="category" class="custom-control custom-select" id="category">
-                <option selected>-</option>
+                <option value="" selected>-</option>
                 @foreach($categories as $id => $category)   
-                <option value="{{ $id }}">{{ $category }}</option>
+                <option value="{{ $id }}" {{ $product->categories[0]->id == $id ? 'selected' : '' }}>{{ $category }}</option>
                 @endforeach
             </select>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back;
 use ImageController;
 use App\Model\Product;
 use App\Model\Category;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $user = Auth::user();
         $request['slug'] = $this->slugify($request->slug);
@@ -72,9 +73,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::whereActive(true)->pluck('name', 'id');
+        return view('admin.product.edit', compact ('product', 'categories'));
     }
 
     /**
@@ -84,9 +86,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $user = Auth::user();
+        $request['slug'] = $this->slugify($request->slug);
+        $request['active'] = 'on' === $request->active;
+        $image = $this->uploadImage($request->file('featured_image'));
+        $request['image'] = $image;
+        $request['user_id'] = $user->id;
+        $product->update($request->all());
+
+        $product->categories()->sync([$request->category]);
+        return redirect()->route('products.index')->with(['info' => 'Data produk berhasil di ubah']);
     }
 
     /**
@@ -95,9 +106,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
     }
 
     /**
